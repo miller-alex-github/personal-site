@@ -1,4 +1,8 @@
-﻿using Ma.Web.Data;
+﻿using Hangfire;
+using Ma.Web.Data;
+using Ma.Web.Filters;
+using Ma.Web.HangfireJobs;
+using Ma.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,15 +33,17 @@ namespace Ma.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddSingleton<IEmailService, EmailService>();
+            services.AddSingleton<IAppointmentNotification, AppointmentNotification>();
+            services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -58,6 +64,14 @@ namespace Ma.Web
 
             app.UseAuthentication();
 
+            app.UseHangfireServer();
+            app.UseHangfireDashboard(options: new DashboardOptions
+            {
+                Authorization = new[] { new HangfireDashboardAuthorizationFilter() }                
+            });
+
+            RecurringJob.AddOrUpdate<IAppointmentNotification>(appointment => appointment.Check(), Cron.Hourly);
+ 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -7,7 +7,7 @@ My personal website built in ASP.NET MVC for .NET Core in C#
 
 It includes the following features:
 
-* Birthdays Reminder: It allows me to be notified about my friends birthday.
+*  Appointment notification service: It allows me to be notified via email about my friends birthday or some important appointments.
 
 
 ## Technology
@@ -19,3 +19,7 @@ The following technology is used to develop this website:
 * Platform: .NET Core 2.1
 * Database: MSSQL
 * HTML5 / CSS3
+* Hangfire www.hangfire.io (perform background processing)
+* Bootstrap www.getbootstrap.com (front-end component library)
+* Dependency Injection
+* SMTP
