@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -45,6 +44,8 @@ namespace Ma.Web.Services
                     mail.Subject = subject;
                     mail.Body    = message;
                     smtp.Send(mail);
+
+                    logger.LogInformation($"Send email to: {to}, subject: {subject}, message: {message}");
                 }
             }
 

@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ma.Web.Data.Migrations
-{
-    public partial class CreateIdentitySchema : Migration
+{   
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
