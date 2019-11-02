@@ -22,7 +22,9 @@ The following technology is used to develop this website:
 * HTML5 / CSS3
 * Hangfire www.hangfire.io (perform background processing)
 * Bootstrap www.getbootstrap.com (front-end component library)
-* Polly www.github.com/App-vNext/Polly (allows to express resilience and transient fault handling policies)
 * Dependency Injection
 * SMTP
-* HTTP security: Protect visitors against clickjacking attacks by using "X-FRAME-OPTIONS".
+* Security: 
+	* Protect against clickjacking attacks.
+	* Prevents the browser from doing MIME-type sniffing
+	* Prevents XSS attacks

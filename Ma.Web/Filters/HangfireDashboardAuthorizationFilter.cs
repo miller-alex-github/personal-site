@@ -8,14 +8,6 @@ namespace Ma.Web.Filters
     /// </summary>
     public class HangfireDashboardAuthorizationFilter : IDashboardAuthorizationFilter
     {
-        public bool Authorize(DashboardContext context)
-        {
-            var httpContext = context.GetHttpContext();
-
-            // TODO: Hangfire -> httpContext.User.IsInRole("Admin")
-            
-            // Allow all authenticated users to see the Dashboard (potentially dangerous).
-            return httpContext.User.Identity.IsAuthenticated;
-        }
+        public bool Authorize(DashboardContext context) => context.GetHttpContext().User.IsInRole("Admin");
     }
 }

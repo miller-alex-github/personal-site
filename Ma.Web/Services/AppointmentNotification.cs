@@ -1,6 +1,6 @@
 ﻿using Hangfire;
-using Ma.Web.Services;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -17,35 +17,29 @@ namespace Ma.Web.HangfireJobs
     }
        
     public class AppointmentNotification : IAppointmentNotification
-    {
-        private readonly IHostingEnvironment environment;
+    {       
         private readonly ILogger<AppointmentNotification> logger;
-        private readonly IEmailService email;
+        private readonly IEmailSender email;
+        private readonly IConfiguration configuration;
 
-        public AppointmentNotification(IHostingEnvironment environment, ILogger<AppointmentNotification> logger, IEmailService email)
-        {
-            this.environment = environment;
+        public AppointmentNotification(ILogger<AppointmentNotification> logger, IEmailSender email, IConfiguration configuration)
+        {            
             this.logger = logger;
             this.email = email;
+            this.configuration = configuration;
         }
 
         public async Task Check()
         {
-            var to      = "";
+            var to      = configuration["Admin:Email"];
             var subject = "Appointment Notification";
             var message = DateTime.Now.ToString("g");
 
             // TODO: implement business logic here
 
-            if (environment.IsDevelopment())
-            {
-                logger.LogInformation($"Send email to: {to}, subject: {subject}, message: {message}");
-                return; 
-            }
-
             try
             {                
-                await email.SendEmail(to, subject, message);
+                await email.SendEmailAsync(to, subject, message);
             }
             catch (Exception exc)
             {                

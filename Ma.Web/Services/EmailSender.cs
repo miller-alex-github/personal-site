@@ -1,0 +1,62 @@
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
+
+namespace Ma.Web.Services
+{
+    public class EmailSender : IEmailSender
+    {
+        private readonly IHostingEnvironment environment;
+        private readonly ILogger<EmailSender> logger;
+        private readonly IConfiguration configuration;
+
+        public EmailSender(IHostingEnvironment environment, ILogger<EmailSender> logger, IConfiguration configuration)
+        {
+            this.environment = environment;
+            this.logger = logger;
+            this.configuration = configuration;
+        }
+
+        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            if (environment.IsDevelopment())
+            {
+                logger.LogInformation($"Send email to: {email}, subject: {subject}, message: {htmlMessage}");
+                return Task.CompletedTask;
+            }
+            else
+            {
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = configuration["Email:Email"],
+                        Password = configuration["Email:Password"]
+                    };
+
+                    smtp.Credentials = credential;
+                    smtp.Host = configuration["Email:Host"];
+                    smtp.Port = int.Parse(configuration["Email:Port"]);
+                    smtp.EnableSsl = true;
+
+                    using (var mail = new MailMessage())
+                    {
+                        mail.To.Add(new MailAddress(email));
+                        mail.From = new MailAddress(configuration["Email:Email"]);
+                        mail.Subject = subject;
+                        mail.Body = htmlMessage;
+                        mail.IsBodyHtml = true;
+
+                        logger.LogInformation($"Send email to: {email}, subject: {subject}, message: {htmlMessage}");
+
+                        return smtp.SendMailAsync(mail);
+                    }
+                }
+            }
+        }
+    }
+}
