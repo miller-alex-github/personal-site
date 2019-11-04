@@ -9,8 +9,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		HowTo.md = HowTo.md
 		LICENSE = LICENSE
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseScripts", "DatabaseScripts", "{4FE785DA-02C4-4FC0-A06F-90E94CE37A51}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\DeleteAllTables.sql = ..\..\..\Desktop\DeleteAllTables.sql
 	EndProjectSection
 EndProject
 Global
@@ -26,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4FE785DA-02C4-4FC0-A06F-90E94CE37A51} = {00C55F4A-37BE-48D1-A09B-E96F373E4237}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C332BE90-3318-452D-BA93-84D76053C6DC}

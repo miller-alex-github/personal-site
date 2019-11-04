@@ -37,12 +37,16 @@ namespace Ma.Web
 
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-            
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedEmail = true)               
-                .AddRoles<IdentityRole>()                
-                .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddDefaultIdentity<IdentityUser>(config =>
+                {
+                    config.SignIn.RequireConfirmedEmail = true;
+                })
+                .AddRoles<IdentityRole>()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IAppointmentNotification, AppointmentNotification>();
             services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
