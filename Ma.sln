@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
 		HowTo.md = HowTo.md
 		LICENSE = LICENSE
 		README.md = README.md
@@ -16,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseScripts", "DatabaseScripts", "{4FE785DA-02C4-4FC0-A06F-90E94CE37A51}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\DeleteAllTables.sql = ..\..\..\Desktop\DeleteAllTables.sql
+		DeleteAllTables.sql = DeleteAllTables.sql
 	EndProjectSection
 EndProject
 Global

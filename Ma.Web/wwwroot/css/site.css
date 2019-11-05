@@ -1,16 +1,73 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    color: #393939;
 }
 
 /* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+/* Logo of the web site*/
+img.logo {
+    width: 400px;
+    height: 140px;
+    margin: 8px;
+}
+
+.navbar-custom {
+    background-color: #f0f0f0;
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
+    margin-bottom: 0px;
+    border-radius: 0;
+    font-family: Lato, Helvetica;
+    font-size: medium;
+    font-weight: bold;
+    text-shadow: 4px 4px 4px #cecece;
+}
+
+    .navbar-custom .navbar-nav > li > a {
+        color: #393939;
+    }
+
+    .navbar-custom .navbar-nav > .active > a {
+        color: #fff;
+        background-color: transparent;
+    }
+
+        .navbar-custom .navbar-nav > li > a:hover,
+        .navbar-custom .navbar-nav > li > a:focus,
+        .navbar-custom .navbar-nav > .active > a:hover,
+        .navbar-custom .navbar-nav > .active > a:focus,
+        .navbar-custom .navbar-nav > .open > a {
+            text-decoration: none;
+            background-color: #ddd;
+        }
+
+    .navbar-custom .navbar-brand {
+        color: #393939;
+    }
+
+    .navbar-custom .navbar-toggle {
+        border-color: #425766;
+        background-color: #425766;
+    }
+
+        .navbar-customr .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+            background-color: #31414C;
+        }
+
+        .navbar-custom .navbar-toggle .icon-bar {
+            background-color: #d7e2e9;
+        }
+
+    .navbar-custom .navbar-collapse,
+    .navbar-custom .navbar-form {
+        border-color: #d7e2e9;
+    }
 
 /* Carousel */
 .carousel-caption p {
@@ -33,5 +90,13 @@ body {
     /* Hide captions */
     .carousel-caption {
         display: none;
+    }
+}
+
+@media screen and (max-width: 549px) {
+    .logo {
+        max-width: 286px;
+        max-height: 100px;
+        margin: 0px 0px 8px 0px;
     }
 }

@@ -46,7 +46,8 @@ namespace Ma.Web
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            
+
+            services.AddTransient<IAppVersionService, AppVersionService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IAppointmentNotification, AppointmentNotification>();
             services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
