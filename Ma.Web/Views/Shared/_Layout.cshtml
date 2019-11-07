@@ -51,8 +51,7 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="About">ABOUT</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">CONTACT</a></li>
-                    @if (User.IsInRole("Admin"))
-                    {
+                    @if (User.IsInRole("Admin")){
                         <li><a asp-area="" asp-controller="Admin" asp-action="Index">ADMIN</a></li>
                     }
                 </ul>
@@ -64,11 +63,11 @@
     <div class="container body-content">
         @RenderBody()  
         <hr />
-        <footer class="border-top footer text-muted">
-            <div class="d-flex justify-content-between">
+        <footer class="border-top">
+            <div class="container">
                 <div class="row">
-                    <div class="col-sm-6">&copy; 2019 - <a href="mailto:info@miller-alex.de">Alexander Miller</a></div>
-                    <div class="col-sm-6 text-right">v @AppVersionService.Version</div>
+                    <div class="col-xs-8">&copy; 2019 - <a href="mailto:info@miller-alex.de">Alexander Miller</a></div>
+                    <div class="col-xs-4 text-right">v @AppVersionService.Version</div>
                 </div>
             </div>
         </footer>

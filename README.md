@@ -19,6 +19,7 @@ The following technology is used to develop this website:
 * Platform: .NET Core 2.1 / ASP.NET Core
 * SQL Server as RDBMS
 * Entity Framework Core 3.0
+	* Migrations
 * HTML5 / CSS3
 * Hangfire www.hangfire.io (perform background processing)
 * Bootstrap www.getbootstrap.com (front-end component library)

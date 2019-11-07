@@ -9,8 +9,14 @@ using System.Threading.Tasks;
 
 namespace Ma.Web.Data
 {
+    /// <summary>
+    /// Represents the extensions for data EF migrations. 
+    /// </summary>
     public static class MigrationExtensions
     {
+        /// <summary>
+        /// Default roles for authorization used on page.
+        /// </summary>
         private static readonly string[] DefaultRoles = new string[] { "Admin", "Subscriber" };
                       
         /// <summary>

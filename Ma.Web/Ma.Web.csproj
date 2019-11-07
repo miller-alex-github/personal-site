@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-Ma.Web-F02F9E5F-4823-4CC8-A49C-426B39D0A835</UserSecretsId> 
-    <Version>1.1</Version> 
+    <Version>1.2</Version> 
     <Authors>Alexander Miller</Authors> 
     <Product>Personal Website</Product>	
   </PropertyGroup>
