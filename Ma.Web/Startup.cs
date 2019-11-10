@@ -1,7 +1,6 @@
 ﻿using Hangfire;
 using Ma.Web.Data;
 using Ma.Web.Filters;
-using Ma.Web.HangfireJobs;
 using Ma.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,7 +48,7 @@ namespace Ma.Web
 
             services.AddTransient<IAppVersionService, AppVersionService>();
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IAppointmentNotification, AppointmentNotification>();
+            services.AddTransient<IAppointmentEmailNotification, AppointmentEmailNotification>();
             services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -69,7 +68,7 @@ namespace Ma.Web
                 app.UseHsts();
             }
 
-            app.AutoMigrateDatabaseAsync().Wait();         
+            app.AutoMigrateDatabase();         
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -83,7 +82,7 @@ namespace Ma.Web
                 Authorization = new[] { new HangfireDashboardAuthorizationFilter() }, 
                 AppPath = "/Admin" // go back to admin site                
             });
-            RecurringJob.AddOrUpdate<IAppointmentNotification>(appointment => appointment.Check(), Cron.Daily(9)); // 9 o'clock AM
+            RecurringJob.AddOrUpdate<IAppointmentEmailNotification>(appointment => appointment.CheckAppointment(), Cron.Daily(9)); // 9 o'clock AM
 
             app.Map("/ping", Ping);
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Ma.Web.Data.Migrations
+namespace Ma.Services.Appointments.Migrations
 {
-    public partial class AddAppointments : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,11 @@ namespace Ma.Web.Data.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(maxLength: 100, nullable: false),
+                    Title = table.Column<string>(maxLength: 200, nullable: false),
                     IsBirthday = table.Column<bool>(nullable: false),
                     Repetitions = table.Column<byte>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTimeOffset>(nullable: true),
+                    ReferenceDate = table.Column<DateTimeOffset>(nullable: false),
                     RemindeBeforeDays = table.Column<int>(nullable: true),
                     RemindeBeforeWeeks = table.Column<int>(nullable: true)
                 },

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace Ma.Web.Models
+namespace Ma.Services.Appointments.DTO
 {
     /// <summary>
     /// Represents an appointment item.
     /// </summary>
+    [Serializable]
     public class AppointmentItem
     {
         /// <summary>
@@ -15,15 +15,12 @@ namespace Ma.Web.Models
 
         /// <summary>
         /// Gets or sets the user id who has created this appointment.
-        /// </summary>
-        [Required]
+        /// </summary>      
         public string UserId { get; set; }
 
         /// <summary>
         /// Gets or sets the short title of the appointment.
-        /// </summary>
-        [Required]
-        [MaxLength(100)]
+        /// </summary>    
         public string Title { get; set; }
 
         /// <summary>
@@ -42,15 +39,15 @@ namespace Ma.Web.Models
         public string Notes { get; set; }
 
         /// <summary>
-        /// Gets or sets the time point used for appointment. 
+        /// Gets or sets the reference date used for appointment. 
         /// It can be fixed date or the date of birth.        
         /// </summary>
-        public DateTimeOffset? Date { get; set; }
+        public DateTimeOffset ReferenceDate { get; set; }
 
         /// <summary>
         /// Gets or sets the value which will be used to remind 
         /// in n day(s) before the appointment happens. 
-        /// </summary>
+        /// </summary>       
         public int? RemindeBeforeDays { get; set; }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using Ma.Web.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ma.Web.Data
@@ -10,7 +9,5 @@ namespace Ma.Web.Data
             : base(options)
         {
         }
-
-        public DbSet<AppointmentItem> Appointments { get; set; }
     }
 }

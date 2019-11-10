@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ma.Services.Appointments</name>
+    </assembly>
+    <members>
+        <member name="T:Ma.Services.Appointments.AppointmentsController">
+            <summary>
+            Represents an appointment controller.
+            </summary>
+        </member>
+        <member name="M:Ma.Services.Appointments.AppointmentsController.Get(System.String)">
+            <summary>
+            Get appointments by unique user id.
+            </summary>      
+            <remarks>GET: api/v1/appointments?userId=1234567789</remarks>
+            <param name="userId">Unique user id.</param>
+            <returns>List of appointments.</returns>
+            <response code="200">Success.</response>
+            <response code="400">Required parameter <paramref name="userId"/> missing or invalid.</response>
+            <response code="500">Internal server error.</response>
+        </member>
+        <member name="T:Ma.Services.Appointments.DTO.AppointmentItem">
+            <summary>
+            Represents an appointment item.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Id">
+            <summary>
+            Gets or sets the unique id of this appointment.
+            </summary>          
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.UserId">
+            <summary>
+            Gets or sets the user id who has created this appointment.
+            </summary>      
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Title">
+            <summary>
+            Gets or sets the short title of the appointment.
+            </summary>    
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.IsBirthday">
+            <summary>
+            Gets or sets a value indicating whether the appointment is a birthday.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Repetitions">
+            <summary>
+            Specifies how often the appointment should be re-evaluated.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Notes">
+            <summary>
+            Gets or sets the notes to the appointment.
+            </summary>        
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.ReferenceDate">
+            <summary>
+            Gets or sets the reference date used for appointment. 
+            It can be fixed date or the date of birth.        
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.RemindeBeforeDays">
+            <summary>
+            Gets or sets the value which will be used to remind 
+            in n day(s) before the appointment happens. 
+            </summary>       
+        </member>
+        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.RemindeBeforeWeeks">
+            <summary>
+            Gets or sets the value which will be used to remind 
+            in n week(s) before the appointment happens. 
+            </summary>
+        </member>
+        <member name="T:Ma.Services.Appointments.MigrationExtensions">
+            <summary>
+            Represents the extensions for data EF migrations. 
+            </summary>
+        </member>
+        <member name="M:Ma.Services.Appointments.MigrationExtensions.AutoMigrateDatabase(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Migrate pending database changes. 
+            </summary>
+        </member>
+        <member name="T:Ma.Services.Appointments.AppointmentItem">
+            <summary>
+            Represents an appointment item.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.Id">
+            <summary>
+            Gets or sets the unique id of this appointment.
+            </summary>          
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.UserId">
+            <summary>
+            Gets or sets the user id who has created this appointment.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.Title">
+            <summary>
+            Gets or sets the short title of the appointment.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.IsBirthday">
+            <summary>
+            Gets or sets a value indicating whether the appointment is a birthday.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.Repetitions">
+            <summary>
+            Specifies how often the appointment should be re-evaluated.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.Notes">
+            <summary>
+            Gets or sets the notes to the appointment.
+            </summary>        
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.ReferenceDate">
+            <summary>
+            Gets or sets the reference date used for appointment. 
+            It can be fixed date or the date of birth.        
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.RemindeBeforeDays">
+            <summary>
+            Gets or sets the value which will be used to remind 
+            in n day(s) before the appointment happens. 
+            </summary>       
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.RemindeBeforeWeeks">
+            <summary>
+            Gets or sets the value which will be used to remind 
+            in n week(s) before the appointment happens. 
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.DaysLeft">
+            <summary>
+            Get the numbers of days left unil the appointment.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.WeeksLeft">
+            <summary>
+            Get the numbers of week left unil the appointment.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.IsToday">
+            <summary>
+            Returns true if the appointment is today.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentItem.IsNeedToRemindNow">
+            <summary>
+            Returns true if the appointment need to be remeinded now.
+            </summary>
+        </member>
+        <member name="T:Ma.Services.Appointments.AppointmentRepetitions">
+            <summary>
+            Values for appointment evaluation frequency.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ma.Web.Models
+namespace Ma.Services.Appointments
 {
     /// <summary>
     /// Values for appointment evaluation frequency.
