@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -17,6 +19,7 @@ namespace Ma.Services.Appointments
     [Produces("application/json")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Authorize]
     public class AppointmentsController : ControllerBase
     {
         private readonly ApplicationDbContext dbContext;
@@ -29,25 +32,19 @@ namespace Ma.Services.Appointments
         }
 
         /// <summary>
-        /// Get appointments by unique user id.
-        /// </summary>      
-        /// <remarks>GET: api/v1/appointments?userId=1234567789</remarks>
-        /// <param name="userId">Unique user id.</param>
+        /// Get appointments from user.
+        /// </summary> 
         /// <returns>List of appointments.</returns>
-        /// <response code="200">Success.</response>
-        /// <response code="400">Required parameter <paramref name="userId"/> missing or invalid.</response>
+        /// <response code="200">Success.</response>        
         /// <response code="500">Internal server error.</response>
         [HttpGet]
         [ApiVersion("1.0")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [SwaggerResponse(500)]
-        public async Task<IActionResult> Get([FromQuery(Name = "userId")] string userId)
+        public async Task<IActionResult> Get()
         {
-
-            if (string.IsNullOrEmpty(userId))
-                return BadRequest($"{nameof(userId)}  must not be null or empty.");
-
+            var userId = "";
             try
             {
                 return Ok(await dbContext.Appointments

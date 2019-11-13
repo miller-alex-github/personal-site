@@ -9,15 +9,12 @@
             Represents an appointment controller.
             </summary>
         </member>
-        <member name="M:Ma.Services.Appointments.AppointmentsController.Get(System.String)">
+        <member name="M:Ma.Services.Appointments.AppointmentsController.Get">
             <summary>
-            Get appointments by unique user id.
-            </summary>      
-            <remarks>GET: api/v1/appointments?userId=1234567789</remarks>
-            <param name="userId">Unique user id.</param>
+            Get appointments from user.
+            </summary> 
             <returns>List of appointments.</returns>
-            <response code="200">Success.</response>
-            <response code="400">Required parameter <paramref name="userId"/> missing or invalid.</response>
+            <response code="200">Success.</response>        
             <response code="500">Internal server error.</response>
         </member>
         <member name="T:Ma.Services.Appointments.DTO.AppointmentItem">
