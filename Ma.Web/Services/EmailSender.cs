@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Polly;
+using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -50,9 +52,11 @@ namespace Ma.Web.Services
                         mail.Body       = htmlMessage;
                         mail.IsBodyHtml = true;
 
-                        logger.LogInformation($"Send email to: {email}, subject: {subject}, message: {htmlMessage}");
-
-                        await smtp.SendMailAsync(mail);
+                        await Policy
+                            .Handle<Exception>()
+                            .WaitAndRetry(3, r => TimeSpan.FromSeconds(2), (ex, ts) => { logger.LogError("Error sending mail. Retrying in 2 sec."); })
+                            .Execute(() => smtp.SendMailAsync(mail))
+                            .ContinueWith(_ => logger.LogInformation($"Notification mail sent to: {email}, subject: {subject}, message: {htmlMessage}"));
                     }
                 }
             }
