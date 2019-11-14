@@ -17,6 +17,7 @@ The following technology is used to develop this website:
 * Language: C#
 * IDE: Visual Studio 2019
 * Platform: .NET Core 2.1 / ASP.NET Core
+* Postman (www.getpostman.com) is used to test micro services API
 * SQL Server as RDBMS
 * LINQ
 * Entity Framework Core 3.0
@@ -33,6 +34,7 @@ The following technology is used to develop this website:
 	* Protect against clickjacking attacks.
 	* Prevents the browser from doing MIME-type sniffing
 	* Prevents XSS attacks
+	* RFC 7519 JSON Web Token (JWT) is used to authenticate by micro services API
 * Automated Tests
 	* Unit Tests use of xUnit. As for naming conventions, I use this: http://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html
 	* Integration Tests 

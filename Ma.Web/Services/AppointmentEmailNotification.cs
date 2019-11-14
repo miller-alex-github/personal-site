@@ -25,7 +25,7 @@ namespace Ma.Web.Services
 
         public async Task CheckAppointment()
         {          
-            // TODO: implement here the  bussines logic.
+            // TODO: implement here the business logic.
 
             try
             {

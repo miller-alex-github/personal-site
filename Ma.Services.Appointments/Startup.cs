@@ -34,25 +34,18 @@ namespace Ma.Services.Appointments
             services.AddApiVersioning();
             services.AddAutoMapper(typeof(Startup));
 
-            var key = Encoding.ASCII.GetBytes(Configuration["JwtSecret"]);
-
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
+            // We use JWT (JSON Web Token) to authenticate the client which use this micro service.
+            var key = Encoding.UTF8.GetBytes(Configuration["JwtSecret"]);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>                           
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
+                    ValidateIssuer = false,   // Not required as no third-party is involved
+                    ValidateAudience = false, // Not required as no third-party is involved
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+                    IssuerSigningKey = new SymmetricSecurityKey(key),                   
+                }
+            );
 
             services.AddSwaggerGen(c =>
             {
