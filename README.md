@@ -9,6 +9,12 @@ It includes the following features:
 
 *  Appointment notification service: It allows me to be notified via email about my friends birthday or some important appointments.
 
+## Application Architecture
+
+The application is build based on the microservices architecture. The below figure shows the high level design of Back-end architecture.
+
+![GitHub Architecture](/design/soa_architecture.png)
+
 
 ## Technical details
 
