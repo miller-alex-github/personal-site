@@ -1,0 +1,18 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/v1.0/{catchAll}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "appointments.miller-alex.de",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/{catchAll}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://api.miller-alex.de/"
+  }
+}

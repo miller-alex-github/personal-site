@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Linq;
@@ -22,11 +23,13 @@ namespace Ma.Services.Appointments
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
+        private readonly ILogger<AppointmentsController> logger;
 
-        public AppointmentsController(ApplicationDbContext dbContext, IMapper mapper)
+        public AppointmentsController(ApplicationDbContext dbContext, IMapper mapper, ILogger<AppointmentsController> logger)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -48,7 +51,8 @@ namespace Ma.Services.Appointments
             }
             catch (Exception exc)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, exc.Message); // TODO: Not secure, better to use logger.
+                logger.LogError("Failed to get list of appointments.", exc);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -74,7 +78,8 @@ namespace Ma.Services.Appointments
             }
             catch (Exception exc)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, exc.Message); // TODO: Not secure, better to use logger.
+                logger.LogError("Failed to get list of appointments by user id.", exc);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

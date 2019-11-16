@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.Services.Appointments", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.Services.Appointments.UnitTests", "Ma.Services.Appointments.UnitTests\Ma.Services.Appointments.UnitTests.csproj", "{12312014-9942-47DC-997B-83E2868CDE68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.ApiGateway", "Ma.ApiGateway\Ma.ApiGateway.csproj", "{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{12312014-9942-47DC-997B-83E2868CDE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12312014-9942-47DC-997B-83E2868CDE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12312014-9942-47DC-997B-83E2868CDE68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

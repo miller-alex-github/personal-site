@@ -11,8 +11,17 @@
         </member>
         <member name="M:Ma.Services.Appointments.AppointmentsController.Get">
             <summary>
-            Get appointments from user.
-            </summary> 
+            Get list of all appointments.
+            </summary>           
+            <returns>List of appointments.</returns>
+            <response code="200">Success.</response>                
+            <response code="500">Internal server error.</response>
+        </member>
+        <member name="M:Ma.Services.Appointments.AppointmentsController.Get(System.String)">
+            <summary>
+            Get list of appointments by user id.
+            </summary>   
+            <param name="userId">Unique user id.</param>
             <returns>List of appointments.</returns>
             <response code="200">Success.</response>        
             <response code="500">Internal server error.</response>
