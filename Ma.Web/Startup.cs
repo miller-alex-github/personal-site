@@ -83,7 +83,7 @@ namespace Ma.Web
                 Authorization = new[] { new HangfireDashboardAuthorizationFilter() }, 
                 AppPath = "/Admin" // go back to admin site                
             });
-            RecurringJob.AddOrUpdate<IAppointmentEmailNotification>(appointment => appointment.CheckAppointment(), Cron.Minutely); // 9 o'clock AM
+            RecurringJob.AddOrUpdate<IAppointmentEmailNotification>(appointment => appointment.CheckAppointment(), Cron.Daily(9)); // 9 o'clock AM
 
             app.Map("/ping", Ping);
 

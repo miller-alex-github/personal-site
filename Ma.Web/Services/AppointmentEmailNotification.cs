@@ -29,7 +29,7 @@ namespace Ma.Web.Services
 
             try
             {
-                await emailSender.SendEmailAsync("info@miller.alex.de", "Appointment", "<h1>Test</h1>");
+                await emailSender.SendEmailAsync("info@miller-alex.de", "Appointment", "<h1>Test</h1>");
             }
             catch (Exception exc)
             {
