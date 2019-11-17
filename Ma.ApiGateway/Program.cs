@@ -13,7 +13,8 @@ namespace Ma.ApiGateway
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((host, config) => config.AddJsonFile($"ocelot.{host.HostingEnvironment.EnvironmentName}.json"))
-                .UseStartup<Startup>();
+            .ConfigureAppConfiguration((host, config) => config
+            .AddJsonFile($"ocelot.{host.HostingEnvironment.EnvironmentName}.json"))
+            .UseStartup<Startup>();
     }
 }
