@@ -25,6 +25,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
     <PackageReference Include="Polly" Version="7.1.1" />
+    <PackageReference Include="Refit" Version="5.0.23" />
   </ItemGroup>
 
 </Project>

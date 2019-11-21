@@ -46,11 +46,14 @@ namespace Ma.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<IJwtService, JwtService>(); // JSON Web Token service
+            services.AddTransient<IJsonWebTokenService, JsonWebTokenService>(); // JSON Web Token service
             services.AddTransient<IAppVersionService, AppVersionService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IAppointmentEmailNotification, AppointmentEmailNotification>();
             services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
+
+            // REST services
+            services.AddHttpClient<IAppointmentsAPI, AppointmentsAPI>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

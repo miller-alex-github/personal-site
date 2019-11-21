@@ -37,6 +37,7 @@ The following technology is used to develop this website:
 * Swagger (wagger.io) allows to describe the structure of the RESTfull API.
 * Autommaper (automapper.org) to map models to DTO (Data Transfer Object)
 * Ocelot (github.com/ThreeMammals/Ocelot) is a .NET API Gateway used for microservices.
+* Refit (github.com/reactiveui/refit) The automatic type-safe REST library for .NET Core, Xamarin and .NET
 * Security: 
 	* Protect against clickjacking attacks.
 	* Prevents the browser from doing MIME-type sniffing
