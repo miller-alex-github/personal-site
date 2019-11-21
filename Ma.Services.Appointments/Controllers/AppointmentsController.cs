@@ -68,7 +68,7 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(200)]
         [SwaggerResponse(500)]
         [Authorize]
-        public async Task<IActionResult> Get(string userId)
+        public async Task<IActionResult> GetByUserId(string userId)
         {
             try
             {
@@ -79,6 +79,33 @@ namespace Ma.Services.Appointments
             catch (Exception exc)
             {
                 logger.LogError("Failed to get list of appointments by user id.", exc);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        /// <summary>
+        /// Create new appointment.
+        /// </summary>   
+        /// <param name="newItem">The appointment item to create.</param>
+        /// <returns>True if successful.</returns>
+        /// <response code="200">Success.</response>        
+        /// <response code="500">Internal server error.</response>
+        [HttpPost()]
+        [ApiVersion("1.0")]
+        [ProducesResponseType(200)]
+        [SwaggerResponse(500)]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddAsync(AppointmentItem newItem)
+        {
+            try
+            {
+                newItem.Id = Guid.NewGuid();
+                await dbContext.Appointments.AddAsync(newItem);
+                return Ok(await dbContext.SaveChangesAsync() == 1);
+            }
+            catch (Exception exc)
+            {
+                logger.LogError("Failed to add new appointments", exc);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

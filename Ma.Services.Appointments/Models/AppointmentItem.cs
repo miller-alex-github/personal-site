@@ -25,12 +25,7 @@ namespace Ma.Services.Appointments
         [Required]
         [MaxLength(200)]
         public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the appointment is a birthday.
-        /// </summary>
-        public bool IsBirthday { get; set; }
-
+                
         /// <summary>
         /// Specifies how often the appointment should be re-evaluated.
         /// </summary>
@@ -60,12 +55,12 @@ namespace Ma.Services.Appointments
         public int? RemindeBeforeWeeks { get; set; }
                 
         /// <summary>
-        /// Get the numbers of days left unil the appointment.
+        /// Get the numbers of days left until the appointment.
         /// </summary>
         public double DaysLeft => (DateTime.UtcNow - ReferenceDate).TotalDays;
 
         /// <summary>
-        /// Get the numbers of week left unil the appointment.
+        /// Get the numbers of week left until the appointment.
         /// </summary>
         public double WeeksLeft => DaysLeft / 7 /* days a week */;
 
@@ -75,7 +70,7 @@ namespace Ma.Services.Appointments
         public bool IsToday => DaysLeft < 0;
 
         /// <summary>
-        /// Returns true if the appointment need to be remeinded now.
+        /// Returns true if the appointment need to be reminded now.
         /// </summary>
         public bool IsNeedToRemindNow => IsToday || DaysLeft < RemindeBeforeDays || WeeksLeft < RemindeBeforeWeeks; 
     }

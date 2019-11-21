@@ -1,0 +1,46 @@
+﻿@model Appointment
+
+@{
+    ViewData["Title"] = "Appointment";
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+<h3>Create New Appointments</h3>
+
+<form asp-controller="Appointments" asp-action="AddItem" method="post">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" type="text" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <input asp-for="Notes" type="text" class="form-control" />
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ReferenceDate"></label>
+        <input asp-for="ReferenceDate" type="text" class="form-control" />
+        <span asp-validation-for="ReferenceDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Repetitions"></label>
+        <input asp-for="Repetitions" type="text" class="form-control" />
+        <span asp-validation-for="Repetitions" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RemindeBeforeDays"></label>
+        <input asp-for="RemindeBeforeDays" type="text" class="form-control" />
+        <span asp-validation-for="RemindeBeforeDays" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RemindeBeforeWeeks"></label>
+        <input asp-for="RemindeBeforeWeeks" type="text" class="form-control" />
+        <span asp-validation-for="RemindeBeforeWeeks" class="text-danger"></span>
+    </div>   
+    <span><button id="SubmitButton" type="submit" class="btn btn-default">Add</button></span>
+    <span><a id="CancelButton" asp-action="Index" asp-controller="Appointments" class="btn btn-default">Cancel</a></span>
+</form>

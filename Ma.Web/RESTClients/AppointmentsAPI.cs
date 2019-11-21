@@ -12,10 +12,13 @@ namespace Ma.Web
     public interface IAppointmentsAPI
     {
         [Get("/Appointments")]
-        Task<IEnumerable<Appointment>> GetAppointments();
+        Task<IEnumerable<Appointment>> GetAsync();
 
         [Get("/Appointments/{userId}")]
-        Task<IEnumerable<Appointment>> GetAppointmentsByUserId([AliasAs("userId")] string userId);
+        Task<IEnumerable<Appointment>> GetByUserIdAsync([AliasAs("userId")] string userId);
+
+        [Post("/Appointments")]
+        Task<bool> AddAsync(Appointment newItem);
     }
 
     public class AppointmentsAPI : IAppointmentsAPI
@@ -30,14 +33,19 @@ namespace Ma.Web
             client = RestService.For<IAppointmentsAPI>(httpClient);
         }
 
-        public async Task<IEnumerable<Appointment>> GetAppointments()
+        public async Task<bool> AddAsync(Appointment newItem)
         {
-            return await client.GetAppointments();
+            return await client.AddAsync(newItem);
         }
 
-        public async Task<IEnumerable<Appointment>> GetAppointmentsByUserId([AliasAs("userId")] string userId)
+        public async Task<IEnumerable<Appointment>> GetAsync()
         {
-            return await client.GetAppointmentsByUserId(userId);
+            return await client.GetAsync();
+        }
+
+        public async Task<IEnumerable<Appointment>> GetByUserIdAsync([AliasAs("userId")] string userId)
+        {
+            return await client.GetByUserIdAsync(userId);
         }
     }
 }

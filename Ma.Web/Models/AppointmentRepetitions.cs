@@ -12,6 +12,10 @@ namespace Ma.Web
         Daily   = 1,
         Weekly  = 2,
         Monthly = 3,
-        Yearly  = 4
+        Yearly  = 4,
+        /// <summary>
+        /// Indicating whether the appointment is a birthday
+        /// </summary>
+        IsBirthday = 5
     }
 }

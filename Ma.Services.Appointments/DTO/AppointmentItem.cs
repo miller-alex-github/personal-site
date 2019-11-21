@@ -24,11 +24,6 @@ namespace Ma.Services.Appointments.DTO
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the appointment is a birthday.
-        /// </summary>
-        public bool IsBirthday { get; set; }
-
-        /// <summary>
         /// Specifies how often the appointment should be re-evaluated.
         /// </summary>
         public AppointmentRepetitions Repetitions { get; set; }
