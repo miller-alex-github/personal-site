@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ma.Web
 {
@@ -7,15 +8,16 @@ namespace Ma.Web
     /// </summary>
     [Serializable]
     public enum AppointmentRepetitions : byte
-    {        
-        Never   = 0,
-        Daily   = 1,
-        Weekly  = 2,
+    {
+        Never = 0,
+        Daily = 1,
+        Weekly = 2,
         Monthly = 3,
-        Yearly  = 4,
+        Yearly = 4,
         /// <summary>
         /// Indicating whether the appointment is a birthday
         /// </summary>
-        IsBirthday = 5
+        [Display(Name = "Birthday")]
+        YearlyAsBirthday = 5
     }
 }

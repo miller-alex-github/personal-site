@@ -7,15 +7,15 @@ namespace Ma.Services.Appointments
     /// </summary>
     [Serializable]
     public enum AppointmentRepetitions : byte
-    {   
-        Never      = 0,
-        Daily      = 1,
-        Weekly     = 2,
-        Monthly    = 3,
-        Yearly     = 4,
+    {
+        Never = 0,
+        Daily = 1,
+        Weekly = 2,
+        Monthly = 3,
+        Yearly = 4,
         /// <summary>
         /// Indicating whether the appointment is a birthday
         /// </summary>
-        IsBirthday = 5
+        YearlyAsBirthday = 5
     }
 }

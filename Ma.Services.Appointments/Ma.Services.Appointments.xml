@@ -17,12 +17,21 @@
             <response code="200">Success.</response>                
             <response code="500">Internal server error.</response>
         </member>
-        <member name="M:Ma.Services.Appointments.AppointmentsController.Get(System.String)">
+        <member name="M:Ma.Services.Appointments.AppointmentsController.GetByUserId(System.String)">
             <summary>
             Get list of appointments by user id.
             </summary>   
             <param name="userId">Unique user id.</param>
             <returns>List of appointments.</returns>
+            <response code="200">Success.</response>        
+            <response code="500">Internal server error.</response>
+        </member>
+        <member name="M:Ma.Services.Appointments.AppointmentsController.AddAsync(Ma.Services.Appointments.AppointmentItem)">
+            <summary>
+            Create new appointment.
+            </summary>   
+            <param name="newItem">The appointment item to create.</param>
+            <returns>True if successful.</returns>
             <response code="200">Success.</response>        
             <response code="500">Internal server error.</response>
         </member>
@@ -45,11 +54,6 @@
             <summary>
             Gets or sets the short title of the appointment.
             </summary>    
-        </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.IsBirthday">
-            <summary>
-            Gets or sets a value indicating whether the appointment is a birthday.
-            </summary>
         </member>
         <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Repetitions">
             <summary>
@@ -109,11 +113,6 @@
             Gets or sets the short title of the appointment.
             </summary>
         </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.IsBirthday">
-            <summary>
-            Gets or sets a value indicating whether the appointment is a birthday.
-            </summary>
-        </member>
         <member name="P:Ma.Services.Appointments.AppointmentItem.Repetitions">
             <summary>
             Specifies how often the appointment should be re-evaluated.
@@ -144,12 +143,12 @@
         </member>
         <member name="P:Ma.Services.Appointments.AppointmentItem.DaysLeft">
             <summary>
-            Get the numbers of days left unil the appointment.
+            Get the numbers of days left until the appointment.
             </summary>
         </member>
         <member name="P:Ma.Services.Appointments.AppointmentItem.WeeksLeft">
             <summary>
-            Get the numbers of week left unil the appointment.
+            Get the numbers of week left until the appointment.
             </summary>
         </member>
         <member name="P:Ma.Services.Appointments.AppointmentItem.IsToday">
@@ -159,12 +158,17 @@
         </member>
         <member name="P:Ma.Services.Appointments.AppointmentItem.IsNeedToRemindNow">
             <summary>
-            Returns true if the appointment need to be remeinded now.
+            Returns true if the appointment need to be reminded now.
             </summary>
         </member>
         <member name="T:Ma.Services.Appointments.AppointmentRepetitions">
             <summary>
             Values for appointment evaluation frequency.
+            </summary>
+        </member>
+        <member name="F:Ma.Services.Appointments.AppointmentRepetitions.YearlyAsBirthday">
+            <summary>
+            Indicating whether the appointment is a birthday
             </summary>
         </member>
     </members>
