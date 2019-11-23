@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+#pragma warning disable 1591
 
 namespace Ma.Services.Appointments
 {
@@ -9,6 +10,6 @@ namespace Ma.Services.Appointments
         {
         }
         
-        public DbSet<AppointmentItem> Appointments { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
     }
 }

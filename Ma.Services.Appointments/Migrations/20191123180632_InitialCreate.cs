@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#pragma warning disable 1591
+
 namespace Ma.Services.Appointments.Migrations
 {
     public partial class InitialCreate : Migration
@@ -12,14 +14,9 @@ namespace Ma.Services.Appointments.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(maxLength: 200, nullable: false),
-                    IsBirthday = table.Column<bool>(nullable: false),
-                    Repetitions = table.Column<byte>(nullable: false),
-                    Notes = table.Column<string>(nullable: true),
-                    ReferenceDate = table.Column<DateTimeOffset>(nullable: false),
-                    RemindeBeforeDays = table.Column<int>(nullable: true),
-                    RemindeBeforeWeeks = table.Column<int>(nullable: true)
+                    Date = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {

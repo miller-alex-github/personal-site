@@ -9,78 +9,91 @@
             Represents an appointment controller.
             </summary>
         </member>
+        <member name="M:Ma.Services.Appointments.AppointmentsController.#ctor(Ma.Services.Appointments.ApplicationDbContext,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{Ma.Services.Appointments.AppointmentsController})">
+            <summary>
+            Creates a new <see cref="T:Ma.Services.Appointments.AppointmentsController"/>.
+            </summary>
+            <param name="context">The <see cref="T:Ma.Services.Appointments.ApplicationDbContext"/> database store.</param>
+            <param name="mapper">The <see cref="T:AutoMapper.IMapper"/> to map objects to DTOs.</param>
+            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger"/> to log the workflow.</param>
+        </member>
         <member name="M:Ma.Services.Appointments.AppointmentsController.Get">
             <summary>
             Get list of all appointments.
             </summary>           
             <returns>List of appointments.</returns>
-            <response code="200">Success.</response>                
+            <response code="200">Success.</response>       
+            <response code="401">Access denied.</response>          
             <response code="500">Internal server error.</response>
         </member>
-        <member name="M:Ma.Services.Appointments.AppointmentsController.GetByUserId(System.String)">
+        <member name="M:Ma.Services.Appointments.AppointmentsController.GetByUserId(System.Guid)">
             <summary>
             Get list of appointments by user id.
             </summary>   
             <param name="userId">Unique user id.</param>
             <returns>List of appointments.</returns>
-            <response code="200">Success.</response>        
+            <response code="200">Success.</response>      
+            <response code="400">Invalid input parameter.</response>  
+            <response code="401">Access denied.</response>    
             <response code="500">Internal server error.</response>
         </member>
-        <member name="M:Ma.Services.Appointments.AppointmentsController.AddAsync(Ma.Services.Appointments.AppointmentItem)">
+        <member name="M:Ma.Services.Appointments.AppointmentsController.CreateAsync(Ma.Services.Appointments.Appointment)">
             <summary>
             Create new appointment.
             </summary>   
-            <param name="newItem">The appointment item to create.</param>
+            <param name="appointment">The appointment to create.</param>
             <returns>True if successful.</returns>
-            <response code="200">Success.</response>        
+            <response code="200">Success.</response>    
+            <response code="400">Invalid input parameter.</response> 
+            <response code="401">Access denied.</response>    
             <response code="500">Internal server error.</response>
         </member>
-        <member name="T:Ma.Services.Appointments.DTO.AppointmentItem">
+        <member name="M:Ma.Services.Appointments.AppointmentsController.UpdateAsync(System.Guid,Ma.Services.Appointments.Appointment)">
             <summary>
-            Represents an appointment item.
+            Update an appointment.
+            </summary>   
+            <param name="id">The unique id of the appointment.</param>
+            <param name="appointment">The appointment to update.</param>
+            <returns>True if successful.</returns>
+            <response code="200">Success.</response>    
+            <response code="400">Invalid input parameter.</response> 
+            <response code="401">Access denied.</response>    
+            <response code="500">Internal server error.</response>
+        </member>
+        <member name="M:Ma.Services.Appointments.AppointmentsController.DeleteAsync(System.Guid)">
+            <summary>
+            Delete an appointment from database.
+            </summary>   
+            <param name="id">The unique id of the appointment.</param>
+            <returns>Returns true if item was successful deleted from database.</returns>
+            <response code="200">Success.</response>    
+            <response code="401">Access denied.</response>    
+            <response code="404">Appointment hasn't been found in database.</response>    
+            <response code="500">Internal server error.</response>
+        </member>
+        <member name="T:Ma.Services.Appointments.MappingProfile">
+            <summary>
+            Represents the mapper from object to DTO (Date Transfer Object)
             </summary>
         </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Id">
+        <member name="M:Ma.Services.Appointments.MappingProfile.#ctor">
             <summary>
-            Gets or sets the unique id of this appointment.
-            </summary>          
+            Creates a new <see cref="T:Ma.Services.Appointments.MappingProfile"/>.
+            </summary>        
         </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.UserId">
+        <member name="T:Ma.Services.Appointments.DTO.Appointment">
             <summary>
-            Gets or sets the user id who has created this appointment.
-            </summary>      
+            Represents an appointment DTO.
+            </summary>
         </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Title">
+        <member name="P:Ma.Services.Appointments.DTO.Appointment.Title">
             <summary>
             Gets or sets the short title of the appointment.
             </summary>    
         </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Repetitions">
+        <member name="P:Ma.Services.Appointments.DTO.Appointment.Date">
             <summary>
-            Specifies how often the appointment should be re-evaluated.
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.Notes">
-            <summary>
-            Gets or sets the notes to the appointment.
-            </summary>        
-        </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.ReferenceDate">
-            <summary>
-            Gets or sets the reference date used for appointment. 
-            It can be fixed date or the date of birth.        
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.RemindeBeforeDays">
-            <summary>
-            Gets or sets the value which will be used to remind 
-            in n day(s) before the appointment happens. 
-            </summary>       
-        </member>
-        <member name="P:Ma.Services.Appointments.DTO.AppointmentItem.RemindeBeforeWeeks">
-            <summary>
-            Gets or sets the value which will be used to remind 
-            in n week(s) before the appointment happens. 
+            Gets or sets the reference date used for appointment.
             </summary>
         </member>
         <member name="T:Ma.Services.Appointments.MigrationExtensions">
@@ -93,82 +106,29 @@
             Migrate pending database changes. 
             </summary>
         </member>
-        <member name="T:Ma.Services.Appointments.AppointmentItem">
+        <member name="T:Ma.Services.Appointments.Appointment">
             <summary>
-            Represents an appointment item.
+            Represents an appointment.
             </summary>
         </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.Id">
+        <member name="P:Ma.Services.Appointments.Appointment.Id">
             <summary>
             Gets or sets the unique id of this appointment.
-            </summary>          
+            </summary>   
         </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.UserId">
+        <member name="P:Ma.Services.Appointments.Appointment.UserId">
             <summary>
             Gets or sets the user id who has created this appointment.
             </summary>
         </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.Title">
+        <member name="P:Ma.Services.Appointments.Appointment.Title">
             <summary>
             Gets or sets the short title of the appointment.
             </summary>
         </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.Repetitions">
+        <member name="P:Ma.Services.Appointments.Appointment.Date">
             <summary>
-            Specifies how often the appointment should be re-evaluated.
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.Notes">
-            <summary>
-            Gets or sets the notes to the appointment.
-            </summary>        
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.ReferenceDate">
-            <summary>
-            Gets or sets the reference date used for appointment. 
-            It can be fixed date or the date of birth.        
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.RemindeBeforeDays">
-            <summary>
-            Gets or sets the value which will be used to remind 
-            in n day(s) before the appointment happens. 
-            </summary>       
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.RemindeBeforeWeeks">
-            <summary>
-            Gets or sets the value which will be used to remind 
-            in n week(s) before the appointment happens. 
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.DaysLeft">
-            <summary>
-            Get the numbers of days left until the appointment.
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.WeeksLeft">
-            <summary>
-            Get the numbers of week left until the appointment.
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.IsToday">
-            <summary>
-            Returns true if the appointment is today.
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.AppointmentItem.IsNeedToRemindNow">
-            <summary>
-            Returns true if the appointment need to be reminded now.
-            </summary>
-        </member>
-        <member name="T:Ma.Services.Appointments.AppointmentRepetitions">
-            <summary>
-            Values for appointment evaluation frequency.
-            </summary>
-        </member>
-        <member name="F:Ma.Services.Appointments.AppointmentRepetitions.YearlyAsBirthday">
-            <summary>
-            Indicating whether the appointment is a birthday
+            Gets or sets the reference date used for appointment  
             </summary>
         </member>
     </members>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
+#pragma warning disable 1591
+
 namespace Ma.Services.Appointments
 {
     public class Program

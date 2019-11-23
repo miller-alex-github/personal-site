@@ -15,6 +15,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+#pragma warning disable 1591
+
 namespace Ma.Services.Appointments
 {
     public class Startup

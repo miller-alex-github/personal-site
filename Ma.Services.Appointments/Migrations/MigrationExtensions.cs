@@ -19,14 +19,14 @@ namespace Ma.Services.Appointments
         {
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+                var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-                if (dbContext.Database.GetPendingMigrations().Any())
+                if (context.Database.GetPendingMigrations().Any())
                 {
                     Policy
                         .Handle<Exception>()
                         .WaitAndRetry(10, r => TimeSpan.FromSeconds(10))
-                        .Execute(() => dbContext.Database.Migrate());
+                        .Execute(() => context.Database.Migrate());
                 }
             }
         }
