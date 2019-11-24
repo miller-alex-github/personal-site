@@ -33,9 +33,9 @@ namespace Ma.Services.Appointments
         /// <param name="logger">The <see cref="ILogger"/> to log the workflow.</param>
         public AppointmentsController(ApplicationDbContext context, IMapper mapper, ILogger<AppointmentsController> logger)
         {
-            this.context = context;
-            this.mapper = mapper;
-            this.logger = logger;
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Ma.Services.Appointments
         {            
             try
             {
-                return Ok(await context.Appointments.ToListAsync());
+                return Ok(await context.Appointments.AsNoTracking().ToListAsync());
             }
             catch (Exception exc)
             {
@@ -93,7 +93,7 @@ namespace Ma.Services.Appointments
             try
             {
                 return Ok(await context.Appointments
-                                .Where(p => p.UserId == userId)
+                                .Where(p => p.UserId == userId).AsNoTracking()
                                 .ProjectTo<DTO.Appointment>(mapper.ConfigurationProvider).ToListAsync());                                          
             }
             catch (Exception exc)
@@ -128,7 +128,7 @@ namespace Ma.Services.Appointments
                 return BadRequest("Appointment object is null");
             }
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || string.IsNullOrWhiteSpace(appointment.Title))
             {
                 logger.LogError("Invalid appointment object sent from client.");
                 return BadRequest("Invalid model object");
@@ -136,8 +136,11 @@ namespace Ma.Services.Appointments
 
             try
             {                
-                await context.Appointments.AddAsync(appointment);
-                return Ok(await context.SaveChangesAsync() == 1);
+                var entity = await context.Appointments.AddAsync(appointment);
+                var ok = await context.SaveChangesAsync() == 1;
+                entity.State = EntityState.Detached;
+                
+                return Ok(ok);
             }
             catch (Exception exc)
             {
@@ -174,26 +177,24 @@ namespace Ma.Services.Appointments
                     return BadRequest("Appointment object is null");
                 }
 
-                if (!ModelState.IsValid)
+                appointment.Id = id;
+
+                if (!ModelState.IsValid || string.IsNullOrWhiteSpace(appointment.Title))
                 {
                     logger.LogError("Invalid appointment object sent from client.");
                     return BadRequest("Invalid model object");
                 }
 
-                
-
-                var appointmentEntity = await context.Appointments.FindAsync(id);                
-                if (appointmentEntity == null)
+                if (!context.Appointments.Any(x => x.Id == id))
                 {
                     logger.LogError($"Appointment with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                mapper.Map(appointment, appointmentEntity);
-
-                context.Appointments.Update(appointment);
-
-                return Ok(await context.SaveChangesAsync() == 1);
+                var entity = context.Appointments.Update(appointment);
+                var ok = await context.SaveChangesAsync() == 1;
+                entity.State = EntityState.Detached;
+                return Ok(ok);
             }
             catch (Exception exc)
             {
@@ -230,9 +231,11 @@ namespace Ma.Services.Appointments
                     return NotFound();
                 }
 
-                context.Appointments.Remove(appointment);
-                
-                return Ok(await context.SaveChangesAsync() == 1);
+                var entity = context.Appointments.Remove(appointment);
+                var ok = await context.SaveChangesAsync() == 1;
+                entity.State = EntityState.Detached;
+
+                return Ok(ok);
             }
             catch (Exception exc)
             {

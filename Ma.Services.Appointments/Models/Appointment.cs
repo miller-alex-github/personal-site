@@ -12,7 +12,7 @@ namespace Ma.Services.Appointments
         /// <summary>
         /// Gets or sets the unique id of this appointment.
         /// </summary>   
-        [Required]
+        [Key]        
         public Guid Id { get; set; }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Ma.Services.Appointments
         /// Gets or sets the short title of the appointment.
         /// </summary>
         [Required]
-        [MaxLength(200)]
+        [MaxLength(200)]     
         public string Title { get; set; }
 
         /// <summary>

@@ -45,6 +45,8 @@ The following technology is used to develop this website:
 	* RFC 7519 JSON Web Token (JWT) is used to authenticate by micro services API
 * Automated Tests
 	* Unit Tests use of xUnit. As for naming conventions, I use this: http://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html
+	* Moq (https://github.com/Moq/moq4) 
+	* FluentAssertions (https://fluentassertions.com)
 	* Integration Tests 
 * Continuous Delivery 
 	* GitHub Actions (https://help.github.com/en/actions/automating-your-workflow-with-github-actions)
