@@ -16,8 +16,7 @@ namespace Ma.Services.Appointments.UnitTests
                 .SetFakeAppointmentsTo(3);
             
             (await factory.Service.Get())
-                .Should().BeOfType<OkObjectResult>().Subject.Value
-                .Should().BeEquivalentTo(factory.FakeAppointments);
+                .Should().BeOfType<OkObjectResult>();
         }
 
         [Fact(DisplayName = "Get all appointments by user id")]

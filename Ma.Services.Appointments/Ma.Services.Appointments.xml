@@ -9,18 +9,19 @@
             Represents an appointment controller.
             </summary>
         </member>
-        <member name="M:Ma.Services.Appointments.AppointmentsController.#ctor(Ma.Services.Appointments.ApplicationDbContext,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{Ma.Services.Appointments.AppointmentsController})">
+        <member name="M:Ma.Services.Appointments.AppointmentsController.#ctor(Ma.Services.Appointments.ApplicationDbContext,AutoMapper.IMapper)">
             <summary>
             Creates a new <see cref="T:Ma.Services.Appointments.AppointmentsController"/>.
             </summary>
             <param name="context">The <see cref="T:Ma.Services.Appointments.ApplicationDbContext"/> database store.</param>
             <param name="mapper">The <see cref="T:AutoMapper.IMapper"/> to map objects to DTOs.</param>
-            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger"/> to log the workflow.</param>
         </member>
-        <member name="M:Ma.Services.Appointments.AppointmentsController.Get">
+        <member name="M:Ma.Services.Appointments.AppointmentsController.Get(System.Int32,System.Int32)">
             <summary>
             Get list of all appointments.
-            </summary>           
+            </summary>          
+            <param name="pageSize">Page size.</param>
+            <param name="pageIndex">Page index.</param>
             <returns>List of appointments.</returns>
             <response code="200">Success.</response>       
             <response code="401">Access denied.</response>          

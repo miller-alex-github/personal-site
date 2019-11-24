@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +26,9 @@ namespace Ma.Services.Appointments.UnitTests
             // Mapper
             var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
             var mapper = config.CreateMapper();
-            
-            // Logger
-            var serviceProvider = new ServiceCollection()
-                .AddLogging()
-                .BuildServiceProvider();
-            var factory = serviceProvider.GetService<ILoggerFactory>();
-            var logger = factory.CreateLogger<AppointmentsController>();
-           
+                     
             // Service of appointments
-            Service = new AppointmentsController(Context, mapper, logger);
+            Service = new AppointmentsController(Context, mapper);
         }
 
         public void Dispose()

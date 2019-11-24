@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Linq;
@@ -23,24 +22,24 @@ namespace Ma.Services.Appointments
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
-        private readonly ILogger<AppointmentsController> logger;
 
         /// <summary>
         /// Creates a new <see cref="AppointmentsController"/>.
         /// </summary>
         /// <param name="context">The <see cref="ApplicationDbContext"/> database store.</param>
         /// <param name="mapper">The <see cref="IMapper"/> to map objects to DTOs.</param>
-        /// <param name="logger">The <see cref="ILogger"/> to log the workflow.</param>
-        public AppointmentsController(ApplicationDbContext context, IMapper mapper, ILogger<AppointmentsController> logger)
+        public AppointmentsController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         /// <summary>
         /// Get list of all appointments.
-        /// </summary>           
+        /// </summary>          
+        /// <param name="pageSize">Page size.</param>
+        /// <param name="pageIndex">Page index.</param>
         /// <returns>List of appointments.</returns>
         /// <response code="200">Success.</response>       
         /// <response code="401">Access denied.</response>          
@@ -52,16 +51,28 @@ namespace Ma.Services.Appointments
         [SwaggerResponse(500)]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]int pageSize = 10,
+                                             [FromQuery]int pageIndex = 0)
         {            
             try
             {
-                return Ok(await context.Appointments.AsNoTracking().ToListAsync());
+                var totalItems = await context.Appointments.LongCountAsync();
+
+                var itemsOnPage = await context.Appointments
+                    .AsNoTracking()
+                    .OrderBy(c => c.Title)
+                    .Skip(pageSize * pageIndex)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                var model = new PaginatedItems<Appointment>(
+                    pageIndex, pageSize, totalItems, itemsOnPage);
+
+                return Ok(model);
             }
             catch (Exception exc)
             {
-                logger.LogError("Failed to get list of appointments.", exc);
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, exc.Message);
             }
         }
 
@@ -85,21 +96,18 @@ namespace Ma.Services.Appointments
         public async Task<IActionResult> GetByUserId(Guid userId)
         {
             if (userId == Guid.Empty)
-            {
-                logger.LogError("UserID object sent from client is empty.");
                 return BadRequest("UserID object is empty");
-            }
-
+            
             try
             {
                 return Ok(await context.Appointments
-                                .Where(p => p.UserId == userId).AsNoTracking()
-                                .ProjectTo<DTO.Appointment>(mapper.ConfigurationProvider).ToListAsync());                                          
+                        .Where(p => p.UserId == userId).AsNoTracking()
+                        .ProjectTo<DTO.Appointment>(mapper.ConfigurationProvider).ToListAsync());                                          
             }
             catch (Exception exc)
             {
-                logger.LogError($"Failed to get list of appointments with user id: {userId}.", exc);
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to get list of appointments with user id: {userId}. {exc.Message}");
             }
         }
 
@@ -123,16 +131,10 @@ namespace Ma.Services.Appointments
         public async Task<IActionResult> CreateAsync(Appointment appointment)
         {
             if (appointment == null)
-            {
-                logger.LogError("Appointment object sent from client is null.");
                 return BadRequest("Appointment object is null");
-            }
 
             if (!ModelState.IsValid || string.IsNullOrWhiteSpace(appointment.Title))
-            {
-                logger.LogError("Invalid appointment object sent from client.");
                 return BadRequest("Invalid model object");
-            }
 
             try
             {                
@@ -144,8 +146,8 @@ namespace Ma.Services.Appointments
             }
             catch (Exception exc)
             {
-                logger.LogError("Failed to add new appointments", exc);
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to create new appointment. {exc.Message}");
             }
         }
 
@@ -172,24 +174,15 @@ namespace Ma.Services.Appointments
             try
             {
                 if (appointment == null)
-                {
-                    logger.LogError("Appointment object sent from client is null.");
                     return BadRequest("Appointment object is null");
-                }
 
                 appointment.Id = id;
 
                 if (!ModelState.IsValid || string.IsNullOrWhiteSpace(appointment.Title))
-                {
-                    logger.LogError("Invalid appointment object sent from client.");
                     return BadRequest("Invalid model object");
-                }
 
                 if (!context.Appointments.Any(x => x.Id == id))
-                {
-                    logger.LogError($"Appointment with id: {id}, hasn't been found in db.");
                     return NotFound();
-                }
 
                 var entity = context.Appointments.Update(appointment);
                 var ok = await context.SaveChangesAsync() == 1;
@@ -198,8 +191,8 @@ namespace Ma.Services.Appointments
             }
             catch (Exception exc)
             {
-                logger.LogError($"Failed to update an appointments with id: {id}", exc);
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to update an appointments with id: {id}. {exc.Message}");
             }
         }
 
@@ -226,10 +219,7 @@ namespace Ma.Services.Appointments
             {
                 var appointment = await context.Appointments.FindAsync(id);
                 if (appointment == null)
-                {
-                    logger.LogError($"Appointment with id: {id}, hasn't been found in db.");
                     return NotFound();
-                }
 
                 var entity = context.Appointments.Remove(appointment);
                 var ok = await context.SaveChangesAsync() == 1;
@@ -239,8 +229,8 @@ namespace Ma.Services.Appointments
             }
             catch (Exception exc)
             {
-                logger.LogError($"Failed to delete an appointment with id: {id}", exc);
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to delete an appointment with id: {id}. {exc.Message}");
             }
         }
     }
