@@ -55,7 +55,7 @@ namespace Ma.Services.Appointments
                 {
                     Title = "Appointment Management API",
                     Version = "v1.0",
-                    Description = "The goal of the appointment service is to provide a cloud-based functionallity to help you to organize you time effective.",
+                    Description = "The goal of the appointment service is to provide a cloud-based functionality to help you to organize you time effective.",
                     Contact = new Contact
                     {
                         Name = "Alexandr Miller",

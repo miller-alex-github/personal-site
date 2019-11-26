@@ -53,7 +53,6 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Get([FromQuery]int pageSize = 10,
                                              [FromQuery]int pageIndex = 0)
         {            
@@ -101,7 +100,6 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         [Authorize]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> GetByUserId(Guid userId)
         {
             if (userId == Guid.Empty)
@@ -138,7 +136,6 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAsync(Appointment appointment)
         {
             if (appointment == null)
@@ -181,7 +178,6 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody]Appointment appointment)
         {
             try
@@ -225,7 +221,6 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try

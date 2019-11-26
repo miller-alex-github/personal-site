@@ -15,6 +15,8 @@ namespace Ma.Web.Services
     {
         /// <summary>
         /// Creates JSON Web Token according to current authenticated user.
+        /// This token get limited access to use a service function for a 
+        /// defined period of time.
         /// </summary>        
         string Create();
     }
@@ -36,11 +38,16 @@ namespace Ma.Web.Services
             var claims = user == null ? null : new ClaimsIdentity(user.Claims);
             var handler = new JwtSecurityTokenHandler();
 
+            // Specify a start time five minutes earlier to allow for client clock skew.
+            var notBefore = DateTime.UtcNow.AddMinutes(-5);
+            // Specify a validity period of five minutes starting from now.
+            var expires = DateTime.UtcNow.AddMinutes(5);
+
             var token = handler.CreateJwtSecurityToken(
                 issuer: null,    // Not required as no third-party is involved
                 audience: null,  // Not required as no third-party is involved                
-                notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddDays(1),
+                notBefore:notBefore, 
+                expires: expires,
                 subject: claims,
                 signingCredentials: new SigningCredentials(
                                         new SymmetricSecurityKey(

@@ -10,22 +10,14 @@
         <thead class="thead-inverse">
             <tr>
                 <th>Title</th>
-                <th>Notes</th>
                 <th>Date</th>
-                <th>Repetition</th>
-                <th>Days before reminding</th>
-                <th>Weeks before reminding</th>
             </tr>
         </thead>
-        @foreach (var item in Model.AppointmentItems)
+        @foreach (var item in Model.AppointmentItems.Data)
         {
             <tr>
                 <td>@item.Title</td>
-                <td>@item.Notes</td>
-                <td>@item.ReferenceDate</td>
-                <td>@item.Repetitions</td>
-                <td>@item.RemindeBeforeDays</td>
-                <td>@item.RemindeBeforeWeeks</td>
+                <td>@item.Date</td>
             </tr>
         }
     </table>

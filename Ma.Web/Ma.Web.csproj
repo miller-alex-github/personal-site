@@ -28,4 +28,8 @@
     <PackageReference Include="Refit" Version="5.0.23" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ma.Shared\Ma.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

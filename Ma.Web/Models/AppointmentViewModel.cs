@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Ma.Shared;
 
 namespace Ma.Web
 {
     public class AppointmentViewModel
     {
-        public IEnumerable<Appointment> AppointmentItems { get; set; }
+        public PaginatedItems<Appointment> AppointmentItems { get; set; }
     }
 }

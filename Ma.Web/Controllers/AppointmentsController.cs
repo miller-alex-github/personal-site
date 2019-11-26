@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -34,7 +35,7 @@ namespace Ma.Web.Controllers
         {
             if (ModelState.IsValid)
             {                
-                newItem.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                newItem.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 var successful = await appointmentsAPI.AddAsync(newItem);
                 if (!successful)

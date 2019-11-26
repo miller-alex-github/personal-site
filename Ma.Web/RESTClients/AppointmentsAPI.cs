@@ -1,8 +1,8 @@
-﻿using Ma.Web.Services;
+﻿using Ma.Shared;
+using Ma.Web.Services;
 using Microsoft.Extensions.Configuration;
 using Refit;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -11,12 +11,9 @@ namespace Ma.Web
 {
     public interface IAppointmentsAPI
     {
-        [Get("/Appointments")]
-        Task<IEnumerable<Appointment>> GetAsync();
-
-        [Get("/Appointments/{userId}")]
-        Task<IEnumerable<Appointment>> GetByUserIdAsync([AliasAs("userId")] string userId);
-
+        [Get("/Appointments?pageSize={pageSize}&pageIndex={pageIndex}")]
+        Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0);
+        
         [Post("/Appointments")]
         Task<bool> AddAsync(Appointment newItem);
     }
@@ -38,14 +35,9 @@ namespace Ma.Web
             return await client.AddAsync(newItem);
         }
 
-        public async Task<IEnumerable<Appointment>> GetAsync()
+        public async Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0)
         {
-            return await client.GetAsync();
-        }
-
-        public async Task<IEnumerable<Appointment>> GetByUserIdAsync([AliasAs("userId")] string userId)
-        {
-            return await client.GetByUserIdAsync(userId);
+            return await client.GetAsync(pageSize, pageIndex);
         }
     }
 }
