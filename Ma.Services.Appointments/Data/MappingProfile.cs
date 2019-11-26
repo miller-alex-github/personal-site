@@ -12,7 +12,7 @@ namespace Ma.Services.Appointments
         /// </summary>        
         public MappingProfile()
         {
-            CreateMap<Appointment, DTO.Appointment>();
+            CreateMap<Appointment, AppointmentDTO>();
         }
     }
 }

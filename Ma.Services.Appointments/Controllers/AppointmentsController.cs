@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Ma.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,22 +39,30 @@ namespace Ma.Services.Appointments
         /// <summary>
         /// Get list of all appointments.
         /// </summary>          
-        /// <param name="pageSize">Page size.</param>
-        /// <param name="pageIndex">Page index.</param>
+        /// <param name="pageSize">Amount of items to retrieve. Defaults to 10. Must be valid 
+        /// integer between 0 and 100.</param>
+        /// <param name="pageIndex">The index of paginated page.</param>
         /// <returns>List of appointments.</returns>
         /// <response code="200">Success.</response>       
         /// <response code="401">Access denied.</response>          
         /// <response code="500">Internal server error.</response>
         [HttpGet()]
         [ApiVersion("1.0")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(PaginatedItems<Appointment>), 200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Get([FromQuery]int pageSize = 10,
                                              [FromQuery]int pageIndex = 0)
         {            
+            if (pageSize < 0 || pageSize > 100)
+                return BadRequest("The size of the page must be a valid integer between 0 and 100!");
+
+            if (pageIndex < 0 || pageIndex > int.MaxValue)
+                return BadRequest($"The index of the page must be a valid integer between 0 and {int.MaxValue}!");
+
             try
             {
                 var totalItems = await context.Appointments.LongCountAsync();
@@ -87,10 +96,10 @@ namespace Ma.Services.Appointments
         /// <response code="500">Internal server error.</response>
         [HttpGet("{userId}")]
         [ApiVersion("1.0")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(List<AppointmentDTO>), 200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(500)]
         [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GetByUserId(Guid userId)
@@ -102,7 +111,7 @@ namespace Ma.Services.Appointments
             {
                 return Ok(await context.Appointments
                         .Where(p => p.UserId == userId).AsNoTracking()
-                        .ProjectTo<DTO.Appointment>(mapper.ConfigurationProvider).ToListAsync());                                          
+                        .ProjectTo<AppointmentDTO>(mapper.ConfigurationProvider).ToListAsync());                                          
             }
             catch (Exception exc)
             {
@@ -119,13 +128,15 @@ namespace Ma.Services.Appointments
         /// <response code="200">Success.</response>    
         /// <response code="400">Invalid input parameter.</response> 
         /// <response code="401">Access denied.</response>    
+        /// <response code="404">Not found.</response>    
         /// <response code="500">Internal server error.</response>
         [HttpPost()]
         [ApiVersion("1.0")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAsync(Appointment appointment)
@@ -159,14 +170,16 @@ namespace Ma.Services.Appointments
         /// <returns>True if successful.</returns>
         /// <response code="200">Success.</response>    
         /// <response code="400">Invalid input parameter.</response> 
-        /// <response code="401">Access denied.</response>    
+        /// <response code="401">Access denied.</response>   
+        /// <response code="404">Not found.</response>    
         /// <response code="500">Internal server error.</response>
         [HttpPut("{id}")]
         [ApiVersion("1.0")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody]Appointment appointment)
@@ -207,10 +220,10 @@ namespace Ma.Services.Appointments
         /// <response code="500">Internal server error.</response>
         [HttpDelete("{id}")]
         [ApiVersion("1.0")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(bool), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteAsync(Guid id)

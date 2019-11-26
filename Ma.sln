@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.Services.Appointments", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.Services.Appointments.UnitTests", "Ma.Services.Appointments.UnitTests\Ma.Services.Appointments.UnitTests.csproj", "{12312014-9942-47DC-997B-83E2868CDE68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.ApiGateway", "Ma.ApiGateway\Ma.ApiGateway.csproj", "{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.ApiGateway", "Ma.ApiGateway\Ma.ApiGateway.csproj", "{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.Shared", "Ma.Shared\Ma.Shared.csproj", "{2822C37F-C451-408A-832D-AE637F884D56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2822C37F-C451-408A-832D-AE637F884D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2822C37F-C451-408A-832D-AE637F884D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2822C37F-C451-408A-832D-AE637F884D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2822C37F-C451-408A-832D-AE637F884D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Ma.Services.Appointments.DTO
+namespace Ma.Services.Appointments
 {
     /// <summary>
     /// Represents an appointment DTO.
     /// </summary>
     [Serializable]
-    public class Appointment
+    public class AppointmentDTO
     {        
         /// <summary>
         /// Gets or sets the short title of the appointment.

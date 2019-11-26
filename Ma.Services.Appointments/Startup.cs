@@ -80,10 +80,9 @@ namespace Ma.Services.Appointments
                     return versions.Any(v => $"v{v.ToString()}" == docName);
                 });
 
-                // XML Documentation
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                // Add all XML Documentation files from bin directory.
+                var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
+                xmlFiles.ForEach(xml => c.IncludeXmlComments(xml));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -110,7 +109,7 @@ namespace Ma.Services.Appointments
             });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/docs/v1.0/docs.json", "Appointment Management API - v1.0");
+                c.SwaggerEndpoint("/docs/v1.0/docs.json", "v1.0");
                 c.RoutePrefix = "docs";
             });
 

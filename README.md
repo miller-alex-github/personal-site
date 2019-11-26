@@ -15,6 +15,7 @@ The application is build based on the microservices architecture. The below figu
 
 ![GitHub Architecture](/design/soa_architecture.png)
 
+**API Gateway.** The API gateway is the entry point for clients. Instead of calling services directly, clients call the API gateway, which forwards the call to the appropriate services on the back end.
 
 ## Technical details
 
@@ -50,3 +51,7 @@ The following technology is used to develop this website:
 	* Integration Tests 
 * Continuous Delivery 
 	* GitHub Actions (https://help.github.com/en/actions/automating-your-workflow-with-github-actions)
+
+## Software Design Patterns
+* **Model View Controller** to developing UI which divides the related program logic into three separate layers. 
+* **Circuit Breaker** to handle faults, such as slow network connections and timeouts to improve the stability of application.

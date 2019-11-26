@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ma.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:Ma.Shared.PaginatedItems`1">
+            <summary>
+            Represents a pagination of entities to indicate a series of related content exists across multiple pages.
+            </summary>
+            <typeparam name="TEntity">Type of pagination object.</typeparam>
+        </member>
+        <member name="P:Ma.Shared.PaginatedItems`1.PageSize">
+            <summary>
+            Get amount of items to show.
+            </summary>
+        </member>
+        <member name="P:Ma.Shared.PaginatedItems`1.PageIndex">
+            <summary>
+            Get current index of page.
+            </summary>
+        </member>
+        <member name="P:Ma.Shared.PaginatedItems`1.TotalCount">
+            <summary>
+            Get the total number of items across all pages.
+            </summary>
+        </member>
+        <member name="P:Ma.Shared.PaginatedItems`1.Data">
+            <summary>
+            Get the items of data.
+            </summary>
+        </member>
+        <member name="M:Ma.Shared.PaginatedItems`1.#ctor(System.Int32,System.Int32,System.Int64,System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Creates a new PaginatedItems object.
+            </summary>        
+        </member>
+    </members>
+</doc>
