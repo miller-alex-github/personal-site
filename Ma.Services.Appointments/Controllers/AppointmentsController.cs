@@ -178,7 +178,7 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody]Appointment appointment)
+        public async Task<IActionResult> UpdateAsync(Guid id, Appointment appointment)
         {
             try
             {

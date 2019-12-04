@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Ma.Web.Controllers
 {
     [Authorize]
-    public class AppointmentsController : Controller
+    public class BirthdaysController : Controller
     {
         private readonly IAppointmentsAPI appointmentsAPI;
 
-        public AppointmentsController(IAppointmentsAPI appointmentsAPI)
+        public BirthdaysController(IAppointmentsAPI appointmentsAPI)
         {
             this.appointmentsAPI = appointmentsAPI;
         }
@@ -31,13 +31,13 @@ namespace Ma.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddItem([FromForm]Appointment newItem)
+        public async Task<IActionResult> Create([FromForm]Appointment newItem)
         {
             if (ModelState.IsValid)
             {                
                 newItem.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                var successful = await appointmentsAPI.AddAsync(newItem);
+                var successful = await appointmentsAPI.CreateAsync(newItem);
                 if (!successful)
                     return BadRequest("Could not add item.");
 

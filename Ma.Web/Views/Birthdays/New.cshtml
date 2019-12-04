@@ -7,10 +7,10 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<form asp-controller="Appointments" asp-action="AddItem" method="post">
+<form asp-controller="Appointments" asp-action="Create" method="post">
     <div class="container pt-15">
         <div class="panel panel-primary">
-            <div class="panel-heading">Create an Appointment</div>
+            <div class="panel-heading">Create an Birthday</div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -29,7 +29,7 @@
                     </div>
                 </div>               
                 <span><button id="SubmitButton" type="submit" class="btn btn-default btn-primary">Add</button></span>
-                <span><a id="CancelButton" asp-action="Index" asp-controller="Appointments" class="btn btn-default">Cancel</a></span>
+                <span><a id="CancelButton" asp-action="Index" asp-controller="Birtdays" class="btn btn-default">Cancel</a></span>
             </div>
         </div>
     </div>

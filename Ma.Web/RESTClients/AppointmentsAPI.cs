@@ -15,7 +15,13 @@ namespace Ma.Web
         Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0);
         
         [Post("/Appointments")]
-        Task<bool> AddAsync(Appointment newItem);
+        Task<bool> CreateAsync(Appointment appointment);
+
+        [Put("/Appointments/{id}")]
+        Task<bool> UpdateAsync(Guid id, Appointment appointment);
+
+        [Delete("/Appointments/{id}")]
+        Task<bool> DeleteAsync(Guid id);
     }
 
     public class AppointmentsAPI : IAppointmentsAPI
@@ -30,14 +36,16 @@ namespace Ma.Web
             client = RestService.For<IAppointmentsAPI>(httpClient);
         }
 
-        public async Task<bool> AddAsync(Appointment newItem)
-        {
-            return await client.AddAsync(newItem);
-        }
+        public async Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0) 
+            => await client.GetAsync(pageSize, pageIndex);
 
-        public async Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0)
-        {
-            return await client.GetAsync(pageSize, pageIndex);
-        }
+        public async Task<bool> CreateAsync(Appointment appointment) 
+            => await client.CreateAsync(appointment);
+
+        public async Task<bool> UpdateAsync(Guid id, Appointment appointment)
+            => await client.UpdateAsync(id, appointment);
+
+        public async Task<bool> DeleteAsync(Guid id)
+            => await client.DeleteAsync(id);
     }
 }

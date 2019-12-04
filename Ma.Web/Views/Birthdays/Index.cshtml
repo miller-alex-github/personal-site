@@ -1,16 +1,16 @@
 ﻿@model AppointmentViewModel
 
 @{
-    ViewData["Title"] = "Appointments";
+    ViewData["Title"] = "Birthdays";
 }
 
-<h3>Appointments</h3>
+<h3>Birthdays</h3>
 <div class="panel panel-default appointment-panel">
     <table class="table table-hover">
         <thead class="thead-inverse">
             <tr>
-                <th>Title</th>
-                <th>Date</th>
+                <th>Name</th>
+                <th>Birthday</th>
             </tr>
         </thead>
         @foreach (var item in Model.AppointmentItems.Data)
@@ -22,7 +22,7 @@
         }
     </table>
     <div class="panel-footer add-item-form">
-        <a id="NewAppointmentButton" asp-action="New" asp-controller="Appointments" class="btn btn-default">Add new appointment</a>
+        <a id="NewBirthdayButton" asp-action="New" asp-controller="Birthdays" class="btn btn-default">Add new birthday</a>
     </div>
 </div>
 
