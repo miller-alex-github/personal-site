@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace Ma.Services.Appointments
 {
@@ -7,6 +8,7 @@ namespace Ma.Services.Appointments
     /// Represents an appointment.
     /// </summary>
     [Serializable]
+    [DebuggerDisplay("{"+ nameof(Date) + "} {" + nameof(Title) + "}")]
     public class Appointment
     {
         /// <summary>

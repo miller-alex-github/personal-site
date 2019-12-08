@@ -4,8 +4,4 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\MillerA\Documents\GitHub\personal-site\Ma.Shared\Ma.Shared.xml</DocumentationFile>
-  </PropertyGroup>
-
 </Project>

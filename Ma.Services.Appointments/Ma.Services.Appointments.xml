@@ -4,6 +4,18 @@
         <name>Ma.Services.Appointments</name>
     </assembly>
     <members>
+        <member name="T:Ma.Services.Appointments.AppointmentHandler">
+            <summary>
+            Represents a handler of appointments.
+            </summary>
+        </member>
+        <member name="M:Ma.Services.Appointments.AppointmentHandler.ParseFile(System.Guid,System.String)">
+            <summary>
+            Parse a file to appointments.
+            </summary>
+            <param name="userId">User ID who creates the appointments.</param>
+            <param name="text">A text of appointments.</param>
+        </member>
         <member name="T:Ma.Services.Appointments.AppointmentsController">
             <summary>
             Represents an appointment controller.
@@ -20,8 +32,9 @@
             <summary>
             Get list of all appointments.
             </summary>          
-            <param name="pageSize">Page size.</param>
-            <param name="pageIndex">Page index.</param>
+            <param name="pageSize">Amount of items to retrieve. Defaults to 10. Must be valid 
+            integer between 0 and 100.</param>
+            <param name="pageIndex">The index of paginated page.</param>
             <returns>List of appointments.</returns>
             <response code="200">Success.</response>       
             <response code="401">Access denied.</response>          
@@ -47,6 +60,7 @@
             <response code="200">Success.</response>    
             <response code="400">Invalid input parameter.</response> 
             <response code="401">Access denied.</response>    
+            <response code="404">Not found.</response>    
             <response code="500">Internal server error.</response>
         </member>
         <member name="M:Ma.Services.Appointments.AppointmentsController.UpdateAsync(System.Guid,Ma.Services.Appointments.Appointment)">
@@ -58,7 +72,8 @@
             <returns>True if successful.</returns>
             <response code="200">Success.</response>    
             <response code="400">Invalid input parameter.</response> 
-            <response code="401">Access denied.</response>    
+            <response code="401">Access denied.</response>   
+            <response code="404">Not found.</response>    
             <response code="500">Internal server error.</response>
         </member>
         <member name="M:Ma.Services.Appointments.AppointmentsController.DeleteAsync(System.Guid)">
@@ -72,6 +87,19 @@
             <response code="404">Appointment hasn't been found in database.</response>    
             <response code="500">Internal server error.</response>
         </member>
+        <member name="M:Ma.Services.Appointments.AppointmentsController.ImportAsync(System.Guid,System.String)">
+            <summary>
+            Import a file with appointments.
+            </summary>   
+            <param name="userId">The user id who creates the appointment.</param>
+            <param name="text">The text with appointments.</param>
+            <returns>True if successful.</returns>
+            <response code="200">Success.</response>    
+            <response code="400">Invalid input parameter.</response> 
+            <response code="401">Access denied.</response>    
+            <response code="404">Not found.</response>    
+            <response code="500">Internal server error.</response>
+        </member>
         <member name="T:Ma.Services.Appointments.MappingProfile">
             <summary>
             Represents the mapper from object to DTO (Date Transfer Object)
@@ -81,21 +109,6 @@
             <summary>
             Creates a new <see cref="T:Ma.Services.Appointments.MappingProfile"/>.
             </summary>        
-        </member>
-        <member name="T:Ma.Services.Appointments.DTO.Appointment">
-            <summary>
-            Represents an appointment DTO.
-            </summary>
-        </member>
-        <member name="P:Ma.Services.Appointments.DTO.Appointment.Title">
-            <summary>
-            Gets or sets the short title of the appointment.
-            </summary>    
-        </member>
-        <member name="P:Ma.Services.Appointments.DTO.Appointment.Date">
-            <summary>
-            Gets or sets the reference date used for appointment.
-            </summary>
         </member>
         <member name="T:Ma.Services.Appointments.MigrationExtensions">
             <summary>
@@ -130,6 +143,21 @@
         <member name="P:Ma.Services.Appointments.Appointment.Date">
             <summary>
             Gets or sets the reference date used for appointment  
+            </summary>
+        </member>
+        <member name="T:Ma.Services.Appointments.AppointmentDTO">
+            <summary>
+            Represents an appointment DTO.
+            </summary>
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentDTO.Title">
+            <summary>
+            Gets or sets the short title of the appointment.
+            </summary>    
+        </member>
+        <member name="P:Ma.Services.Appointments.AppointmentDTO.Date">
+            <summary>
+            Gets or sets the reference date used for appointment.
             </summary>
         </member>
     </members>

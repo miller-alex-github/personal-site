@@ -4,15 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Authors>Ma.Services.Appointments</Authors>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\GitHub\personal-site\Ma.Services.Appointments\Ma.Services.Appointments.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\GitHub\personal-site\Ma.Services.Appointments\Ma.Services.Appointments.xml</DocumentationFile>
-  </PropertyGroup>
-
+  
   <ItemGroup>
     <Compile Remove="Migrations\20191110122132_InitialCreate.cs" />
     <Compile Remove="Migrations\20191110122132_InitialCreate.Designer.cs" />

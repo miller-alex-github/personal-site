@@ -241,5 +241,58 @@ namespace Ma.Services.Appointments
                     $"Failed to delete an appointment with id: {id}. {exc.Message}");
             }
         }
+
+        /// <summary>
+        /// Import a file with appointments.
+        /// </summary>   
+        /// <param name="userId">The user id who creates the appointment.</param>
+        /// <param name="text">The text with appointments.</param>
+        /// <returns>True if successful.</returns>
+        /// <response code="200">Success.</response>    
+        /// <response code="400">Invalid input parameter.</response> 
+        /// <response code="401">Access denied.</response>    
+        /// <response code="404">Not found.</response>    
+        /// <response code="500">Internal server error.</response>
+        [HttpPost("{userId}")]
+        [ApiVersion("1.0")]
+        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ImportAsync(Guid userId, string text)
+        {         
+            try
+            {
+                var appointments = AppointmentHandler.ParseFile(userId, text);
+               
+                var count = 0;
+                foreach (var appointment in appointments)
+                {
+                    var appointmentDB = await context.Appointments.FirstOrDefaultAsync(x => 
+                    x.Title == appointment.Title &&
+                    x.Date == appointment.Date);
+
+                    if (appointmentDB == null)
+                    {
+                        await context.Appointments.AddAsync(appointment);
+                        count++;
+                    }
+                }
+                                
+                var ok = await context.SaveChangesAsync() == count;                
+                return Ok(ok);
+            }
+            catch (ArgumentNullException exc)
+            {
+                return BadRequest(exc.Message);
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to create new appointment. {exc.Message}");
+            }
+        }
     }
 }

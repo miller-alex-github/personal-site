@@ -22,6 +22,9 @@ namespace Ma.Web
 
         [Delete("/Appointments/{id}")]
         Task<bool> DeleteAsync(Guid id);
+               
+        [Post("/Appointments/{userId}")]
+        Task<bool> ImportAsync(Guid userId, string text);
     }
 
     public class AppointmentsAPI : IAppointmentsAPI
@@ -47,5 +50,8 @@ namespace Ma.Web
 
         public async Task<bool> DeleteAsync(Guid id)
             => await client.DeleteAsync(id);
+
+        public async Task<bool> ImportAsync(Guid userId, string text)
+            => await client.ImportAsync(userId, text);
     }
 }

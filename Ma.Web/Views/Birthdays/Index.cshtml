@@ -4,6 +4,16 @@
     ViewData["Title"] = "Birthdays";
 }
 
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#file").change(function () {
+                $('#import_file').click();
+            });
+        });
+    </script>
+}
+
 <h3>Birthdays</h3>
 <div class="panel panel-default appointment-panel">
     <table class="table table-hover">
@@ -17,13 +27,16 @@
         {
             <tr>
                 <td>@item.Title</td>
-                <td>@item.Date</td>
+                <td>@item.Date.ToString("yyyy-MM-dd")</td>
             </tr>
         }
     </table>
-    <div class="panel-footer add-item-form">
-        <a id="NewBirthdayButton" asp-action="New" asp-controller="Birthdays" class="btn btn-default">Add new birthday</a>
+    <div class="panel-footer clearfix">
+        <a id="new_birthday" asp-action="New" asp-controller="Birthdays" class="btn btn-primary btn-sm pull-left">Add new birthday</a>
+        <form asp-controller="Birthdays" class="pull-right" asp-action="Import" method="post" enctype="multipart/form-data" >
+            <label class="btn btn-primary btn-sm">Import file<input id="file" type="file" name="file" style="display: none;"></label>
+            <button id="import_file" style="display: none;" type="submit" />
+        </form>
     </div>
 </div>
-
 

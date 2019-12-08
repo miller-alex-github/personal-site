@@ -28,6 +28,7 @@ namespace Ma.Web
         /// Gets or sets the reference date used for appointment  
         /// </summary>
         [Required]
-        public DateTimeOffset Date { get; set; }
+        [DisplayFormat(DataFormatString = @"{0:yyyy-MM-dd hh:mm}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset Date { get; set; } = DateTime.UtcNow;
     }
 }

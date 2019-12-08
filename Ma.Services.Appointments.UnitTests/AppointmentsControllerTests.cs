@@ -137,5 +137,26 @@ namespace Ma.Services.Appointments.UnitTests
             (await factory.Service.DeleteAsync(factory.FakeAppointments[0].Id))
                 .Should().BeOfType<OkObjectResult>();
         }
+
+        [Fact(DisplayName = "Import file of appointments")]
+        public async Task Import_File_OK()
+        {
+            var content = "01.01.1900 A\r\n01.01.1900 A, B\r\n01.01.1901 A, B";            
+            using var factory = new AppointmentsControllerFactory();
+           
+            (await factory.Service.ImportAsync(factory.FakeUserID, content))
+                .Should().BeOfType<OkObjectResult>();
+
+            var first = await factory.Context.Appointments.FirstAsync();
+            first.Title.Should().Be("A");
+            first.Date.Should().Be(DateTimeOffset.Parse("01.01.1900"));
+
+            var last = await factory.Context.Appointments.LastAsync();
+            last.Title.Should().Be("A, B");
+            last.Date.Should().Be(DateTimeOffset.Parse("01.01.1901"));
+
+            (await factory.Service.ImportAsync(Guid.Empty, null))
+                .Should().BeOfType<BadRequestObjectResult>();
+        }
     }
 }
