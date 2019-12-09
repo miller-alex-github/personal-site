@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Birthdays";
+    var NoData = Model.AppointmentItems.Data.Count() == 0;
 }
 
 @section scripts{
@@ -14,27 +15,46 @@
     </script>
 }
 
-<h3>Birthdays</h3>
+@if (!NoData)
+{
+    <h3>Birthdays</h3>
+}
 <div class="panel panel-default appointment-panel">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Name</th>
-                <th>Birthday</th>
-            </tr>
-        </thead>
-        @foreach (var item in Model.AppointmentItems.Data)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.Date.ToString("yyyy-MM-dd")</td>
-            </tr>
-        }
-    </table>
+    @if (NoData)
+    {
+        <div class="row justify-content-center text-center">
+            <div class="col-md-10">
+                <h3>No Birthdays</h3>
+                <p class="text-muted">
+                    You do not have any birthdays yet. Add a new birthday by clicking the <strong>Add Birthday</strong> button below.
+                </p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <table class="table table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.AppointmentItems.Data)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                    <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+            }
+        </table>
+    }
     <div class="panel-footer clearfix">
-        <a id="new_birthday" asp-action="New" asp-controller="Birthdays" class="btn btn-primary btn-sm pull-left">Add new birthday</a>
-        <form asp-controller="Birthdays" class="pull-right" asp-action="Import" method="post" enctype="multipart/form-data" >
-            <label class="btn btn-primary btn-sm">Import file<input id="file" type="file" name="file" style="display: none;"></label>
+        <a asp-action="Add" class="btn btn-primary btn-sm pull-left">Add Birthday</a>
+        <form asp-action="Import" class="pull-right" method="post" enctype="multipart/form-data">
+            <label class="btn btn-primary btn-sm">Import File<input id="file" type="file" name="file" style="display: none;"></label>
             <button id="import_file" style="display: none;" type="submit" />
         </form>
     </div>

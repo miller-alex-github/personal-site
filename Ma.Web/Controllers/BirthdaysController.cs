@@ -20,16 +20,29 @@ namespace Ma.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var appointmentItems = await appointmentsAPI.GetAsync(pageSize:100);
+            var appointmentItems = await appointmentsAPI.GetAsync(pageSize:50);
             var model = new AppointmentViewModel { AppointmentItems = appointmentItems };
 
             return View(model);
         }
-
-        [HttpGet]
-        public IActionResult New()
+               
+        public IActionResult Add()
         {            
             return View(model: new Appointment());
+        }
+                
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await appointmentsAPI.DeleteAsync(id);
+            }
+            catch
+            {
+                // ignore
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -50,8 +63,7 @@ namespace Ma.Web.Controllers
                 return View("New", model: newItem);
             }
         }
-
-        [HttpPost]
+               
         public async Task<IActionResult> Import(IFormFile file)
         {
             if (file == null || file.Length == 0)
