@@ -25,28 +25,14 @@ namespace Ma.Web.Controllers
 
             return View(model);
         }
-               
+        
         public IActionResult Add()
-        {            
-            return View(model: new Appointment());
-        }
-                
-        public async Task<IActionResult> Delete(Guid id)
         {
-            try
-            {
-                await appointmentsAPI.DeleteAsync(id);
-            }
-            catch
-            {
-                // ignore
-            }
-
-            return RedirectToAction("Index");
+            return View(model: new Appointment());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm]Appointment newItem)
+        public async Task<IActionResult> Add([FromForm]Appointment newItem)
         {
             if (ModelState.IsValid)
             {                
@@ -63,7 +49,50 @@ namespace Ma.Web.Controllers
                 return View("New", model: newItem);
             }
         }
-               
+                
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var appointment = await appointmentsAPI.GetByIdAsync(id);
+            if (appointment == null)
+                return NotFound();
+
+            return View(model: appointment);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Guid id, [FromForm]Appointment item)
+        {
+            if (ModelState.IsValid)
+            {
+                item.Id = id;
+                item.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                var successful = await appointmentsAPI.UpdateAsync(item);
+                if (!successful)
+                    return BadRequest("Could not update the item.");
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Edit", model: item);
+            }
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await appointmentsAPI.DeleteAsync(id);
+            }
+            catch
+            {
+                // ignore
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Import(IFormFile file)
         {
             if (file == null || file.Length == 0)

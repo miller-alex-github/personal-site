@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +33,6 @@ namespace Ma.Services.Appointments
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddApiVersioning();
-            services.AddAutoMapper(typeof(Startup));
 
             // We use JWT (JSON Web Token) to authenticate the client which use this micro service.
             var key = Encoding.UTF8.GetBytes(Configuration["JwtSecret"]);

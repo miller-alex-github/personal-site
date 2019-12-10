@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Ma.Shared;
+﻿using Ma.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,17 +19,14 @@ namespace Ma.Services.Appointments
     public class AppointmentsController : ControllerBase
     {
         private readonly ApplicationDbContext context;
-        private readonly IMapper mapper;
-
+        
         /// <summary>
         /// Creates a new <see cref="AppointmentsController"/>.
         /// </summary>
-        /// <param name="context">The <see cref="ApplicationDbContext"/> database store.</param>
-        /// <param name="mapper">The <see cref="IMapper"/> to map objects to DTOs.</param>
-        public AppointmentsController(ApplicationDbContext context, IMapper mapper)
+        /// <param name="context">The <see cref="ApplicationDbContext"/> database store.</param>       
+        public AppointmentsController(ApplicationDbContext context)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
-            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
@@ -85,36 +79,39 @@ namespace Ma.Services.Appointments
         }
 
         /// <summary>
-        /// Get list of appointments by user id.
+        /// Get appointment by id.
         /// </summary>   
-        /// <param name="userId">Unique user id.</param>
-        /// <returns>List of appointments.</returns>
+        /// <param name="id">Unique id of appointment.</param>
+        /// <returns>An appointment.</returns>
         /// <response code="200">Success.</response>      
         /// <response code="400">Invalid input parameter.</response>  
         /// <response code="401">Access denied.</response>    
+        /// <response code="404">Not found.</response>    
         /// <response code="500">Internal server error.</response>
-        [HttpGet("{userId}")]
+        [HttpGet("{id}")]
         [ApiVersion("1.0")]
-        [ProducesResponseType(typeof(List<AppointmentDTO>), 200)]
+        [ProducesResponseType(typeof(Appointment), 200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [Authorize]
-        public async Task<IActionResult> GetByUserId(Guid userId)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetById(Guid id)
         {
-            if (userId == Guid.Empty)
-                return BadRequest("UserID object is empty");
+            if (id == Guid.Empty)
+                return BadRequest("ID object is empty");
             
             try
             {
-                return Ok(await context.Appointments
-                        .Where(p => p.UserId == userId).AsNoTracking()
-                        .ProjectTo<AppointmentDTO>(mapper.ConfigurationProvider).ToListAsync());                                          
+                var appointment = await context.Appointments.FirstOrDefaultAsync(x => x.Id == id);
+                if (appointment == null)
+                    return NotFound();
+
+                return Ok(appointment);                                          
             }
             catch (Exception exc)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to get list of appointments with user id: {userId}. {exc.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, exc.Message);
             }
         }
 
@@ -161,8 +158,7 @@ namespace Ma.Services.Appointments
 
         /// <summary>
         /// Update an appointment.
-        /// </summary>   
-        /// <param name="id">The unique id of the appointment.</param>
+        /// </summary>          
         /// <param name="appointment">The appointment to update.</param>
         /// <returns>True if successful.</returns>
         /// <response code="200">Success.</response>    
@@ -170,7 +166,7 @@ namespace Ma.Services.Appointments
         /// <response code="401">Access denied.</response>   
         /// <response code="404">Not found.</response>    
         /// <response code="500">Internal server error.</response>
-        [HttpPut("{id}")]
+        [HttpPut()]
         [ApiVersion("1.0")]
         [ProducesResponseType(typeof(bool), 200)]
         [ProducesResponseType(400)]
@@ -178,19 +174,17 @@ namespace Ma.Services.Appointments
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateAsync(Guid id, Appointment appointment)
+        public async Task<IActionResult> UpdateAsync(Appointment appointment)
         {
             try
             {
                 if (appointment == null)
                     return BadRequest("Appointment object is null");
 
-                appointment.Id = id;
-
                 if (!ModelState.IsValid || string.IsNullOrWhiteSpace(appointment.Title))
                     return BadRequest("Invalid model object");
 
-                if (!context.Appointments.Any(x => x.Id == id))
+                if (!context.Appointments.Any(x => x.Id == appointment.Id))
                     return NotFound();
 
                 var entity = context.Appointments.Update(appointment);
@@ -201,7 +195,7 @@ namespace Ma.Services.Appointments
             catch (Exception exc)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to update an appointments with id: {id}. {exc.Message}");
+                    $"Failed to update an appointments with id: {appointment.Id}. {exc.Message}");
             }
         }
 

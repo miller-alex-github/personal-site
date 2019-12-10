@@ -13,12 +13,15 @@ namespace Ma.Web
     {
         [Get("/Appointments?pageSize={pageSize}&pageIndex={pageIndex}")]
         Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0);
-        
+
+        [Get("/Appointments/{id}")]
+        Task<Appointment> GetByIdAsync(Guid id);
+
         [Post("/Appointments")]
         Task<bool> CreateAsync(Appointment appointment);
 
-        [Put("/Appointments/{id}")]
-        Task<bool> UpdateAsync(Guid id, Appointment appointment);
+        [Put("/Appointments")]
+        Task<bool> UpdateAsync(Appointment appointment);
 
         [Delete("/Appointments/{id}")]
         Task<bool> DeleteAsync(Guid id);
@@ -42,11 +45,14 @@ namespace Ma.Web
         public async Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0) 
             => await client.GetAsync(pageSize, pageIndex);
 
+        public async Task<Appointment> GetByIdAsync(Guid id)
+            => await client.GetByIdAsync(id);
+
         public async Task<bool> CreateAsync(Appointment appointment) 
             => await client.CreateAsync(appointment);
 
-        public async Task<bool> UpdateAsync(Guid id, Appointment appointment)
-            => await client.UpdateAsync(id, appointment);
+        public async Task<bool> UpdateAsync(Appointment appointment)
+            => await client.UpdateAsync(appointment);
 
         public async Task<bool> DeleteAsync(Guid id)
             => await client.DeleteAsync(id);

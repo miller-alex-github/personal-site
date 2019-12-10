@@ -59,25 +59,24 @@ namespace Ma.Services.Appointments.UnitTests
             result2.Data.Should().BeEquivalentTo(page2);
         }
 
-        [Fact(DisplayName = "Get all appointments by user id")]
-        public async Task GetByUserId_Appointments_OK()
+        [Fact(DisplayName = "Get appointment by id")]
+        public async Task GetById_Appointment_OK()
         {
             using var factory = new AppointmentsControllerFactory()
                 .SetFakeAppointmentsTo(3);
 
-            (await factory.Service.GetByUserId(factory.FakeUserID))
+            (await factory.Service.GetById(factory.FakeAppointments.LastOrDefault().Id))
                 .Should().BeOfType<OkObjectResult>().Subject.Value
-                .Should().BeEquivalentTo(factory.FakeAppointments, options =>
-                    options.ExcludingMissingMembers()); // because DTO has less property's as original
+                .Should().BeEquivalentTo(factory.FakeAppointments.LastOrDefault());
         }
 
-        [Fact(DisplayName = "Get all appointments by invalid user id")]
-        public async Task GetByUserId_AppointmentsForEmptyUserId_BadRequest()
+        [Fact(DisplayName = "Get appointment by invalid id")]
+        public async Task GetById_AppointmentForEmptyId_BadRequest()
         {
             using var factory = new AppointmentsControllerFactory()
                 .SetFakeAppointmentsTo(1);
 
-            (await factory.Service.GetByUserId(Guid.Empty))
+            (await factory.Service.GetById(Guid.Empty))
                 .Should().BeOfType<BadRequestObjectResult>();
         }
 
@@ -116,16 +115,17 @@ namespace Ma.Services.Appointments.UnitTests
         {
             using var factory = new AppointmentsControllerFactory();
             var A = factory.CreateFakeAppointment("A");
-            var B = factory.CreateFakeAppointment("B");
             
             (await factory.Service.CreateAsync(A))
                 .Should().BeOfType<OkObjectResult>();
 
-            (await factory.Service.UpdateAsync(A.Id, B))
+            A.Title = nameof(Update_Appointment_OK);
+
+            (await factory.Service.UpdateAsync(A))
                  .Should().BeOfType<OkObjectResult>();
 
             (await factory.Context.Appointments.FirstAsync())
-                .Should().BeEquivalentTo(B);
+                .Should().BeEquivalentTo(A);
         }
 
         [Fact(DisplayName = "Delete an appointment")]

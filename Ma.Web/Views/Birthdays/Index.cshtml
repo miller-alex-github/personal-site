@@ -39,15 +39,17 @@
                     <th>Name</th>
                     <th>Birthday</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             @foreach (var item in Model.AppointmentItems.Data)
             {
-                <tr>
-                    <td>@item.Title</td>
-                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
-                    <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a></td>
-                </tr>
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Date.ToString(@"yyyy\/MM\/dd HH:mm")</td>
+            <td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a></td>
+            <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a></td>
+        </tr>
             }
         </table>
     }

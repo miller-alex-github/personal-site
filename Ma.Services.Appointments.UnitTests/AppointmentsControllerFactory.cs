@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +21,7 @@ namespace Ma.Services.Appointments.UnitTests
             Context = new ApplicationDbContext(options);            
             Context.Database.EnsureDeleted(); // Ensures we have a new database with no data in it.
             Context.Database.EnsureCreated();
-
-            // Mapper
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
-            var mapper = config.CreateMapper();
-                     
-            // Service of appointments
-            Service = new AppointmentsController(Context, mapper);
+            Service = new AppointmentsController(Context);
         }
 
         public void Dispose()
