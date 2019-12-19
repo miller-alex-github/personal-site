@@ -1,6 +1,5 @@
 ﻿using Ma.Shared;
 using Ma.Web.Services;
-using Microsoft.Extensions.Configuration;
 using Refit;
 using System;
 using System.Net.Http;
@@ -34,10 +33,9 @@ namespace Ma.Web
     {
         private readonly IAppointmentsAPI client;
 
-        public AppointmentsAPI(IConfiguration config, HttpClient httpClient, IJsonWebTokenService jsonWebTokenService)
-        {
-            var token = jsonWebTokenService.Create();
-            httpClient.BaseAddress = new Uri(config["ApiGateway"]);
+        public AppointmentsAPI(HttpClient httpClient, IJsonWebTokenService jsonWebTokenService)
+        {            
+            var token = jsonWebTokenService.Create();            
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             client = RestService.For<IAppointmentsAPI>(httpClient);
         }

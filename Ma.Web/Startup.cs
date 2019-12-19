@@ -11,18 +11,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 
 namespace Ma.Web
 {
     public class Startup
     {   
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; }        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -52,16 +57,24 @@ namespace Ma.Web
             services.AddTransient<IAppointmentEmailNotification, AppointmentEmailNotification>();
             services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
 
-            // REST services
-            services.AddHttpClient<IAppointmentsAPI, AppointmentsAPI>();
-
+            // REST service 'Appointments'
+            services.AddHttpClient<IAppointmentsAPI, AppointmentsAPI>("ApiGateway", c =>
+            {
+                c.BaseAddress = new Uri(Configuration["ApiGateway"]);
+                c.DefaultRequestHeaders.Add("Accept", "application/json");
+            })
+            .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler()
+            {
+                Proxy = Environment.IsDevelopment() ? null : new WebProxy("http://winproxy.server.lan:3128")   
+            });
+                        
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
