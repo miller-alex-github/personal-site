@@ -46,6 +46,7 @@ The following technology is used to develop this website:
 	* RFC 7519 JSON Web Token (JWT) is used to authenticate by micro services API
 	* Proxy server
 	* HTTPS (Hyper Text Transfer Protocol Secure) = HTTP + SSL/TLS Certificate
+	* HSTS (HTTP Strict Transport Security) https://joonasw.net/view/hsts-in-aspnet-core
 	* WebDAV module of IIS (I removed this module from IIS via web.config to resolve the issue with blocked REST methods (DELETE, UPDATE etc.)
 
 * Automated Tests

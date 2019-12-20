@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,10 @@ namespace Ma.Services.Appointments
                     IssuerSigningKey = new SymmetricSecurityKey(key),                   
                 }
             );
+
+            services.AddDataProtection()
+               .SetApplicationName("isolation-name")
+               .PersistKeysToFileSystem(new DirectoryInfo("."));
 
             services.AddSwaggerGen(c =>
             {

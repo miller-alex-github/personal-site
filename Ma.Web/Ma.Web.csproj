@@ -4,9 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework> 
     <Version>1.2</Version> 
     <Authors>Alexander Miller</Authors> 
-    <Product>Personal Website</Product>	
+    <Product>Personal Website</Product> 
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>  
   </PropertyGroup>
-
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
@@ -23,6 +24,7 @@
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
     <PackageReference Include="Polly" Version="7.1.1" />
     <PackageReference Include="Refit" Version="5.0.23" />
   </ItemGroup>

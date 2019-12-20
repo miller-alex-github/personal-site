@@ -3,6 +3,7 @@ using Ma.Web.Data;
 using Ma.Web.Filters;
 using Ma.Web.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -41,6 +42,10 @@ namespace Ma.Web
 
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddDataProtection()
+               .SetApplicationName("isolation-name")
+               .PersistKeysToFileSystem(new DirectoryInfo("."));
 
             services.AddDefaultIdentity<IdentityUser>(config =>
                 {
@@ -82,7 +87,10 @@ namespace Ma.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                app.UseHsts(configurer => configurer
+                    .MaxAge(days: 365)                    
+                    .IncludeSubdomains()
+                    .Preload());
             }
 
             app.AutoMigrateDatabase();         
