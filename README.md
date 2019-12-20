@@ -44,6 +44,10 @@ The following technology is used to develop this website:
 	* Prevents the browser from doing MIME-type sniffing
 	* Prevents XSS attacks
 	* RFC 7519 JSON Web Token (JWT) is used to authenticate by micro services API
+	* Proxy server
+	* HTTPS (Hyper Text Transfer Protocol Secure) = HTTP + SSL/TLS Certificate
+	* WebDAV module of IIS (I removed this module from IIS via web.config to resolve the issue with blocked REST methods (DELETE, UPDATE etc.)
+
 * Automated Tests
 	* Unit Tests use of xUnit. As for naming conventions, I use this: http://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html
 	* Moq (https://github.com/Moq/moq4) 
