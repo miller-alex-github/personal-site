@@ -51,8 +51,8 @@
             </div>
             <div class="navbar-collapse collapse text-right">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">ABOUT</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">CONTACT</a></li>
+                    <li><a asp-area="" asp-controller="Mbus" asp-action="Index">M-Bus</a></li>
+                    
                     @if (User.IsInRole("Admin")){
                         <li><a asp-area="" asp-controller="Admin" asp-action="Index">ADMIN</a></li>
                     }
