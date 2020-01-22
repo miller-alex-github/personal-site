@@ -8,16 +8,17 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-<h1>M-Bus</h1>
-
+<div class="row-no-gutters">
+    <div class="col-md-2"><img src="~/images/mbus.png" alt="img"></div>
+</div>
 <div class="row">
-    <div class="col-md-8">
-        <p class="lead"><em>Parser for monitoring and analysis of wired M-BUS communication.</em></p>
+    <div class="col-md-9">
+        <h3>Parser for monitoring and analysis of wired M-BUS communication.</h3>
         <p class="text-info">
             <strong>M-Bus</strong> (Meter-Bus) is a European standard (EN 13757-2 physical and link layer,
             EN 13757-3 application layer) for the remote reading of water meter, gas or electricity meters.
             M-Bus is also usable for other types of consumption meters. The M-Bus interface is made for
-            communication on two wires, making it cost-effective.<br />
+            communication on two wires, making it cost-effective. Click <a href="https://m-bus.com/" class="text-danger">here</a> to get more information. <br />
         </p>
         <p class="text-info">
             Just paste your bytes in the input area, click the 'Parse M-Bus frame' button and you will get parsed
@@ -25,13 +26,13 @@
         </p>
         <form asp-action="ParseMbus">
             <span asp-validation-for="InputText" class="text-danger"></span>
-            <textarea asp-for="InputText" class="form-control" rows="5"></textarea>            
-            <div class="row" style="padding:5px;">
-                <div class="col-md-3"><button type="submit" class="btn btn-default btn-primary active">Parse M-Bus frame</button></div>
-                <div style="padding:5px;">
-                    <input asp-for="IsExpert" /> Expert                   
-                </div>
-            </div>
+            <textarea asp-for="InputText" class="form-control" rows="5"></textarea>
+            <table>
+                <tr>
+                    <th><button type="submit" class="btn btn-default btn-primary" style="margin:5px;">Parse M-Bus frame</button></th>
+                    <th><input asp-for="IsExpert" /> Expert</th>
+                </tr>
+            </table>
         </form>
         <p>
             @if (!string.IsNullOrEmpty(Model.Error))
@@ -44,5 +45,4 @@
             }
         </p>
     </div>
-    <div class="col-md-4"><img src="~/images/mbus.png" alt="img" height="300" class="img-circle"></div>
 </div>
