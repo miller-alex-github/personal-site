@@ -1,5 +1,4 @@
 ﻿@using  Ma.Web.Services
-@inject IAppVersionService AppVersionService
 
 <!DOCTYPE html>
 <html>
@@ -52,8 +51,10 @@
             <div class="navbar-collapse collapse text-right">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Mbus" asp-action="Index">M-Bus</a></li>
-                    
-                    @if (User.IsInRole("Admin")){
+                    <li><a asp-area="" asp-controller="WMbus" asp-action="Index">wireless M-Bus</a></li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
                         <li><a asp-area="" asp-controller="Admin" asp-action="Index">ADMIN</a></li>
                     }
                 </ul>
@@ -68,8 +69,7 @@
         <footer class="border-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-8">&copy; 2019 - <a href="mailto:info@miller-alex.de">Alexander Miller</a></div>
-                    <div class="col-xs-4 text-right">v @AppVersionService.Version</div>
+                    <div class="col-xs-8 text-muted">&copy; 2019 - <a href="mailto:info@miller-alex.de">Alexander Miller</a></div>                    
                 </div>
             </div>
         </footer>

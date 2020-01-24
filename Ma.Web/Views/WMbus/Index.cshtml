@@ -1,7 +1,7 @@
 ﻿@model MBusData
 
 @{
-    ViewData["Title"] = "M-Bus";
+    ViewData["Title"] = "wireless M-Bus";
 }
 
 @section Scripts {
@@ -9,30 +9,34 @@
 }
 
 <div class="row-no-gutters">
-    <div class="col-md-2"><img src="~/images/mbus.png" alt="img"></div>
+    <div class="col-md-2"><img src="~/images/wmbus.png" alt="img"></div>
 </div>
 <div class="row">
     <div class="col-md-9">
-        <h3>Parser for monitoring and analysis of wired M-BUS communication.</h3>
+        <h3>Parser for monitoring and analysis of wireless M-BUS communication.</h3>
         <p class="text-info">
-            <strong>M-Bus</strong> (Meter-Bus) is a European standard (EN 13757-2 physical and link layer,
-            EN 13757-3 application layer) for the remote reading of water meter, gas or electricity meters.
-            M-Bus is also usable for other types of consumption meters. The M-Bus interface is made for
-            communication on two wires, making it cost-effective. Click <a href="https://m-bus.com/" class="text-danger">here</a> to get more information. <br />
+            Wireless meter reading requires communication protocols with little overhead for small amounts of data.
+            The <strong>Wireless M-Bus</strong> standard (EN 13757-4) specifies the wireless communication between
+            meters for water, gas, heat and electricity, and the data concentrators.<br />
+            Click <a href="https://oms-group.org/" class="text-danger">here</a> to get more information. <br />
         </p>
         <p class="text-info">
             Just paste your bytes in the input area, click the 'Parse' button and you will get parsed
             meter data in the output area.
         </p>
         <form asp-action="Parse">
-            <div class="form-group">               
-                <label class="control-label">M-Bus packet as hex</label>
+            <div class="form-group">
+                <label class="control-label">Secret key</label>
+                <div>
+                    <input asp-for="SecretKey" class="form-control" placeholder="Please enter the encryption key">
+                </div>
+                <label class="control-label">wireless M-Bus packet as hex</label>
                 <span asp-validation-for="InputText" class="text-danger"></span>
                 <textarea asp-for="InputText" class="form-control" rows="5"></textarea>
                 <table>
                     <tr>
                         <th><button type="submit" class="btn btn-default btn-primary" style="margin:5px;">Parse</button></th>
-                        <th><input asp-for="IsExpert" /> Expert</th>
+                        <th>@*<input asp-for="IsExpert" /> Expert*@</th>
                     </tr>
                 </table>
                 <p>
@@ -45,7 +49,7 @@
                         <textarea asp-for="OutputText" class="form-control" rows="@(Model.OutputText.Split('\n').Length)"></textarea>
                     }
                 </p>
-            </div>
+            </div>            
         </form>        
     </div>
 </div>

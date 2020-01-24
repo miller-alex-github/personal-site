@@ -56,8 +56,7 @@ namespace Ma.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<IJsonWebTokenService, JsonWebTokenService>(); // JSON Web Token service
-            services.AddTransient<IAppVersionService, AppVersionService>();
+            services.AddTransient<IJsonWebTokenService, JsonWebTokenService>(); // JSON Web Token service           
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IAppointmentEmailNotification, AppointmentEmailNotification>();
             services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));

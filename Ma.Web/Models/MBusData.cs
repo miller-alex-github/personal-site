@@ -6,6 +6,7 @@ namespace Ma.Web
     {
         [Required]                
         public string InputText { get; set; }
+        public string SecretKey { get; set; }
         public string OutputText { get; internal set; }
         public string Error { get; internal set; }
         public bool IsExpert { get; set; }
