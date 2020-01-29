@@ -1,9 +1,5 @@
 ﻿@model MBusData
 
-@{
-    ViewData["Title"] = "wireless M-Bus";
-}
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
@@ -14,13 +10,13 @@
 <div class="row">
     <div class="col-md-9">
         <h3>Parser for monitoring and analysis of wireless M-BUS communication.</h3>
-        <p class="text-info">
+        <p>
             Wireless meter reading requires communication protocols with little overhead for small amounts of data.
             The <strong>Wireless M-Bus</strong> standard (EN 13757-4) specifies the wireless communication between
             meters for water, gas, heat and electricity, and the data concentrators.<br />
             Click <a href="https://oms-group.org/" class="text-danger">here</a> to get more information. <br />
         </p>
-        <p class="text-info">
+        <p>
             Just paste your bytes in the input area, click the 'Parse' button and you will get parsed
             meter data in the output area.
         </p>

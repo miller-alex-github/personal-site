@@ -5,7 +5,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] | Alexander Miller</title>
+    <meta name="Description" content="Alexander Miller, Category: M-Bus, wireless M-Bus">
+    <title>Alex Miller</title>
+    <link rel="icon" href="~/images/icon.png">
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -19,9 +21,9 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" />
         <link href='https://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
-    </environment>    
+    </environment>
 </head>
-<body>
+<body>   
     <div class="container">
         <div class="row">
             <div class="col-4">
@@ -33,7 +35,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-custom">
+    <nav class="navbar navbar-custom" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -66,11 +68,13 @@
     <div class="container body-content">
         @RenderBody()  
         <hr />
-        <footer class="border-top">
+        <footer>
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-8 text-muted">&copy; 2019 - <a href="mailto:info@miller-alex.de">Alexander Miller</a></div>                    
-                </div>
+                    <div class="col-xs-8 text-muted">
+                        &copy; 2019 - <a href="mailto:info@miller-alex.de">Alexander Miller</a> <a asp-area="" asp-controller="Home" asp-action="Privacy">(Legal Privacy)</a>
+                    </div>
+                </div>                
             </div>
         </footer>
     </div>

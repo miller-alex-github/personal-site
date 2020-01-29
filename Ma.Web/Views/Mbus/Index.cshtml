@@ -1,9 +1,5 @@
 ﻿@model MBusData
 
-@{
-    ViewData["Title"] = "M-Bus";
-}
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
@@ -14,13 +10,13 @@
 <div class="row">
     <div class="col-md-9">
         <h3>Parser for monitoring and analysis of wired M-BUS communication.</h3>
-        <p class="text-info">
+        <p>
             <strong>M-Bus</strong> (Meter-Bus) is a European standard (EN 13757-2 physical and link layer,
             EN 13757-3 application layer) for the remote reading of water meter, gas or electricity meters.
             M-Bus is also usable for other types of consumption meters. The M-Bus interface is made for
             communication on two wires, making it cost-effective. Click <a href="https://m-bus.com/" class="text-danger">here</a> to get more information. <br />
         </p>
-        <p class="text-info">
+        <p>
             Just paste your bytes in the input area, click the 'Parse' button and you will get parsed
             meter data in the output area.
         </p>
