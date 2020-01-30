@@ -13,6 +13,9 @@ namespace Ma.Web
         [Get("/Appointments?pageSize={pageSize}&pageIndex={pageIndex}")]
         Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0);
 
+        [Get("/Appointments/Upcoming?period={period}&pageSize={pageSize}&pageIndex={pageIndex}")]
+        Task<PaginatedItems<Appointment>> FindUpcomingAppointmentsAsync(int period = 5, int pageSize = 10, int pageIndex = 0);
+        
         [Get("/Appointments/{id}")]
         Task<Appointment> GetByIdAsync(Guid id);
 
@@ -42,6 +45,9 @@ namespace Ma.Web
 
         public async Task<PaginatedItems<Appointment>> GetAsync(int pageSize = 10, int pageIndex = 0) 
             => await client.GetAsync(pageSize, pageIndex);
+
+        public async Task<PaginatedItems<Appointment>> FindUpcomingAppointmentsAsync(int period = 5, int pageSize = 10, int pageIndex = 0)
+           => await client.FindUpcomingAppointmentsAsync(period, pageSize, pageIndex);
 
         public async Task<Appointment> GetByIdAsync(Guid id)
             => await client.GetByIdAsync(id);

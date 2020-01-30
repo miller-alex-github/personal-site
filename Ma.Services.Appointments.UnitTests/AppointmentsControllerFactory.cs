@@ -48,7 +48,7 @@ namespace Ma.Services.Appointments.UnitTests
             {
                 Id = Guid.NewGuid(),
                 UserId = FakeUserID,
-                Date = DateTime.UtcNow,
+                Date = DateTime.UtcNow.AddMinutes(1),
                 Title = title
             };
         }

@@ -1,6 +1,7 @@
 ﻿using Hangfire;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Ma.Web.Services
@@ -17,19 +18,37 @@ namespace Ma.Web.Services
     public class AppointmentEmailNotification : IAppointmentEmailNotification
     {
         private readonly IEmailSender emailSender;
+        private readonly IAppointmentsAPI appointmentsAPI;
 
-        public AppointmentEmailNotification(IEmailSender emailSender)
+        public AppointmentEmailNotification(IEmailSender emailSender, IAppointmentsAPI appointmentsAPI)
         {
             this.emailSender = emailSender;
+            this.appointmentsAPI = appointmentsAPI;
         }
 
         public async Task CheckAppointment()
-        {          
-            // TODO: implement here the business logic.
-
+        {   
             try
             {
-                await emailSender.SendEmailAsync("info@miller-alex.de", "Appointment", "<h1>Test</h1>");
+                var upcomingAppointments = await appointmentsAPI.FindUpcomingAppointmentsAsync(period: 5, pageSize: 30);
+                if (upcomingAppointments == null || upcomingAppointments.TotalCount == 0)
+                    return;
+
+                var sb = new StringBuilder();
+                sb.AppendLine("<h2>Upcoming appointments:</h2>");
+                sb.AppendLine("<ul>");
+                foreach (var appointment in upcomingAppointments.Data)
+                {
+                    sb.Append("<li>")
+                      .Append(appointment.Title)
+                      .Append(" <strong> ")
+                      .Append(appointment.Date.LocalDateTime.ToShortDateString())
+                      .Append(" </strong> ")
+                      .AppendLine("</li>");                    
+                }
+                sb.AppendLine("</ul>");
+
+                await emailSender.SendEmailAsync("info@miller-alex.de", "Upcoming appointments", sb.ToString());
             }
             catch (Exception exc)
             {

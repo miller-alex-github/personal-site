@@ -79,6 +79,66 @@ namespace Ma.Services.Appointments
         }
 
         /// <summary>
+        /// Find upcoming appointments.
+        /// </summary>          
+        /// <param name="pageSize">Amount of items to retrieve. Defaults to 10. Must be valid.
+        /// integer between 0 and 100.</param>
+        /// <param name="period">Integer used to define the period for search (days).</param>
+        /// <param name="pageIndex">The index of paginated page.</param>
+        /// <returns>List of upcoming appointments.</returns>
+        /// <response code="200">Success.</response>       
+        /// <response code="401">Access denied.</response>          
+        /// <response code="500">Internal server error.</response>
+        [HttpGet]
+        [Route("Upcoming")]
+        [ApiVersion("1.0")]
+        [ProducesResponseType(typeof(PaginatedItems<Appointment>), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        public async Task<IActionResult> FindUpcomingAppointments(
+            [FromQuery] int period = 5,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] int pageIndex = 0)
+        {
+            if (period < 1 || period > 530)
+                return BadRequest("The period must be a valid integer between 1 and 530 days!");
+            
+            if (pageSize < 0 || pageSize > 100)
+                return BadRequest("The size of the page must be a valid integer between 0 and 100!");
+
+            if (pageIndex < 0 || pageIndex > int.MaxValue)
+                return BadRequest($"The index of the page must be a valid integer between 0 and {int.MaxValue}!");
+
+            try
+            {
+                var now = DateTimeOffset.UtcNow;
+                var end = DateTimeOffset.UtcNow.AddDays(period);
+                var upcomingAppointments = await context.Appointments
+                    .Where(a => a.Date.AddYears(now.Year - a.Date.Year) >= now && a.Date.AddYears(now.Year - a.Date.Year) <= end)
+                    .ToListAsync();
+
+                var totalItems = upcomingAppointments.Count;
+
+                var itemsOnPage = upcomingAppointments                    
+                    .OrderBy(c => c.Date)
+                    .Skip(pageSize * pageIndex)
+                    .Take(pageSize)
+                    .ToList();
+
+                var model = new PaginatedItems<Appointment>(
+                    pageIndex, pageSize, totalItems, itemsOnPage);
+
+                return Ok(model);
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, exc.Message);
+            }
+        }
+
+        /// <summary>
         /// Get appointment by id.
         /// </summary>   
         /// <param name="id">Unique id of appointment.</param>

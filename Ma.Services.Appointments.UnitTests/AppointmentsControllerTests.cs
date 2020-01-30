@@ -59,6 +59,42 @@ namespace Ma.Services.Appointments.UnitTests
             result2.Data.Should().BeEquivalentTo(page2);
         }
 
+        [Fact(DisplayName = "Find upcoming paginated appointments")]
+        public async Task FindUpcomingAppointments_PaginatedAppointments_OK()
+        {
+            using var factory = new AppointmentsControllerFactory()
+                .SetFakeAppointmentsTo(14);
+
+            var sorted = factory.FakeAppointments.OrderBy(c => c.Date).ToList();
+            var page0 = sorted.GetRange(0, 5);
+            var page1 = sorted.GetRange(5, 5);
+            var page2 = sorted.GetRange(10, 4); // Attention: only 4 items!
+
+            var result0 = (await factory.Service.FindUpcomingAppointments(period: 1, pageSize: 5, pageIndex: 0))
+                .Should().BeOfType<OkObjectResult>().Subject.Value
+                .Should().BeAssignableTo<PaginatedItems<Appointment>>().Subject;
+            result0.PageIndex.Should().Be(0);
+            result0.PageSize.Should().Be(5);
+            result0.TotalCount.Should().Be(14);
+            result0.Data.Should().BeEquivalentTo(page0);
+
+            var result1 = (await factory.Service.FindUpcomingAppointments(period: 1, pageSize: 5, pageIndex: 1))
+                .Should().BeOfType<OkObjectResult>().Subject.Value
+                .Should().BeAssignableTo<PaginatedItems<Appointment>>().Subject;
+            result1.PageIndex.Should().Be(1);
+            result1.PageSize.Should().Be(5);
+            result1.TotalCount.Should().Be(14);
+            result1.Data.Should().BeEquivalentTo(page1);
+
+            var result2 = (await factory.Service.FindUpcomingAppointments(period: 1, pageSize: 5, pageIndex: 2))
+                .Should().BeOfType<OkObjectResult>().Subject.Value
+                .Should().BeAssignableTo<PaginatedItems<Appointment>>().Subject;
+            result2.PageIndex.Should().Be(2);
+            result2.PageSize.Should().Be(5);
+            result2.TotalCount.Should().Be(14);
+            result2.Data.Should().BeEquivalentTo(page2);
+        }
+
         [Fact(DisplayName = "Get appointment by id")]
         public async Task GetById_Appointment_OK()
         {

@@ -3,6 +3,16 @@
 
 <div class="row">
     <div class="col-md-12">
+        <h2>Your Privacy</h2>
+        <blockquote>
+            <p>
+                When you visit any web site, it may store or retrieve information on your browser, mostly in the form of cookies.
+                This information might be about you, your preferences or your device and is mostly used to make the site work
+                as you expect it to. The information does not usually directly identify you, but it can give you a more 
+                personalised web experience.               
+            </p>
+        </blockquote>
+
         <h2>What are cookies?</h2>
         <blockquote>
             <p>
@@ -18,18 +28,21 @@
         <blockquote>
             <dl class="dl-horizontal">
                 <dt>Policy Consent</dt>
-                <dd><strong>(.AspNet.Consent)</strong>
+                <dd>
+                    <strong>(.AspNet.Consent)</strong>
                     Choice question underneath your consent or privacy statement with two answer choices: Yes and No,
                     regarding to requirements for EU General Data Protection Regulation (GDPR).
                 </dd>
                 <dt>Identity</dt>
-                <dd><strong>(.AspNetCore.Identity.Application)</strong>
+                <dd>
+                    <strong>(.AspNetCore.Identity.Application)</strong>
                     We build this website using Microsoft ASP.NET Core technology. ASP.NET Core provides cookie middleware which
                     serializes a user principal into an encrypted cookie and then, on subsequent requests, validates the cookie,
                     recreates the principal and assigns it to the User property on HttpContext.
                 </dd>
                 <dt>Antiforgery</dt>
-                <dd><strong>(.AspNetCore.Antiforgery.x)</strong>
+                <dd>
+                    <strong>(.AspNetCore.Antiforgery.x)</strong>
                     Cookie to prevent Cross-Site Request Forgery attacks in ASP.NET Core. Cross-site request forgery
                     (also known as XSRF or CSRF) is an attack against web-hosted apps whereby a malicious web app can influence
                     the interaction between a client browser and a web app that trusts that browser. These attacks are possible
@@ -38,7 +51,8 @@
                     of the user's previously authenticated session.
                 </dd>
                 <dt>Temp Data</dt>
-                <dd><strong>(.AspNetCore.Mvc.CookieTempDataProvider)</strong>
+                <dd>
+                    <strong>(.AspNetCore.Mvc.CookieTempDataProvider)</strong>
                     System cookie, valid until closing the browser.
                 </dd>
             </dl>

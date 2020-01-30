@@ -34,8 +34,8 @@ namespace Ma.Web.Services
 
         public string Create()
         {
-            var user = httpContextAccessor.HttpContext.User;
-            var claims = user == null ? null : new ClaimsIdentity(user.Claims);
+            var context = httpContextAccessor.HttpContext;
+            var claims = context == null || context.User == null ? null : new ClaimsIdentity(context.User.Claims);
             var handler = new JwtSecurityTokenHandler();
 
             // Specify a start time five minutes earlier to allow for client clock skew.
