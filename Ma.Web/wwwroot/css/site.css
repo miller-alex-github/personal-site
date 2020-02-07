@@ -27,46 +27,49 @@ img.logo {
     font-size: medium;
     font-weight: bold;
 }
+.footer-color {
+    background-color: #f0f0f0;
+}
 
-    .navbar-custom .navbar-nav > li > a {
-        color: #393939;
+.navbar-custom .navbar-nav > li > a {
+    color: #393939;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+    color: #fff;
+    background-color: transparent;
+}
+
+    .navbar-custom .navbar-nav > li > a:hover,
+    .navbar-custom .navbar-nav > li > a:focus,
+    .navbar-custom .navbar-nav > .active > a:hover,
+    .navbar-custom .navbar-nav > .active > a:focus,
+    .navbar-custom .navbar-nav > .open > a {
+        text-decoration: none;
+        background-color: #ddd;
     }
 
-    .navbar-custom .navbar-nav > .active > a {
-        color: #fff;
-        background-color: transparent;
+.navbar-custom .navbar-brand {
+    color: #393939;
+}
+
+.navbar-custom .navbar-toggle {
+    border-color: #425766;
+    background-color: #425766;
+}
+
+    .navbar-customr .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #31414C;
     }
 
-        .navbar-custom .navbar-nav > li > a:hover,
-        .navbar-custom .navbar-nav > li > a:focus,
-        .navbar-custom .navbar-nav > .active > a:hover,
-        .navbar-custom .navbar-nav > .active > a:focus,
-        .navbar-custom .navbar-nav > .open > a {
-            text-decoration: none;
-            background-color: #ddd;
-        }
-
-    .navbar-custom .navbar-brand {
-        color: #393939;
+    .navbar-custom .navbar-toggle .icon-bar {
+        background-color: #d7e2e9;
     }
 
-    .navbar-custom .navbar-toggle {
-        border-color: #425766;
-        background-color: #425766;
-    }
-
-        .navbar-customr .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
-            background-color: #31414C;
-        }
-
-        .navbar-custom .navbar-toggle .icon-bar {
-            background-color: #d7e2e9;
-        }
-
-    .navbar-custom .navbar-collapse,
-    .navbar-custom .navbar-form {
-        border-color: #d7e2e9;
-    }
+.navbar-custom .navbar-collapse,
+.navbar-custom .navbar-form {
+    border-color: #d7e2e9;
+}
 
 /* Carousel */
 .carousel-caption p {
@@ -100,16 +103,7 @@ img.logo {
     }
 }
 
-div.appointment-panel {
-    margin-top: 15px;
-}
-
 .thead-inverse th {
     color: #fff;
     background-color: #8A8E92;
 }
-
-.pt-15 {
-    padding-top: 15px;
-}
-

@@ -4,44 +4,43 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-<div class="row-no-gutters">
-    <div class="col-md-2"><img src="~/images/mbus.png" alt="img"></div>
-</div>
-<div class="row">
-    <div class="col-md-9">
-        <h3>Parser for analysis of wired M-BUS communication.</h3>
-        <p>
-            <strong>M-Bus</strong> (Meter-Bus) is a European standard (EN 13757-2 physical and link layer,
-            EN 13757-3 application layer) for the remote reading of water meter, gas or electricity meters.
-            M-Bus is also usable for other types of consumption meters. The M-Bus interface is made for
-            communication on two wires, making it cost-effective. Click <a href="https://m-bus.com/" class="text-danger">here</a> to get more information. <br />
-        </p>
-        <p>
-            Just paste your bytes in the input area, click the 'Parse' button and you will get parsed
-            meter data in the output area.
-        </p>
-        <form asp-action="Parse">
-            <div class="form-group">               
-                <label class="control-label">M-Bus packet as hex</label>
-                <span asp-validation-for="InputText" class="text-danger"></span>
-                <textarea asp-for="InputText" class="form-control" rows="5"></textarea>
-                <table>
-                    <tr>
-                        <th><button type="submit" class="btn btn-default btn-primary" style="margin:5px;">Parse</button></th>
-                        <th><input asp-for="IsExpert" /> Expert</th>
-                    </tr>
-                </table>
-                <p>
-                    @if (!string.IsNullOrEmpty(Model.Error))
-                    {
-                        <strong class="text-danger">@Model.Error</strong>
-                    }
-                    @if (!string.IsNullOrEmpty(Model.OutputText))
-                    {
-                        <textarea asp-for="OutputText" class="form-control" rows="@(Model.OutputText.Split('\n').Length)"></textarea>
-                    }
-                </p>
+<div class="container">
+    <article class="row single-post mt-1 no-gutters">
+        <div class="col-md-12">
+            <div class="image-wrapper float-left pr-2">
+                <img src="~/images/mbus.png" alt="">
             </div>
-        </form>        
-    </div>
+            <div class="single-post-content-wrapper p-2">
+                <h4>Parser for analysis of wired M-BUS packets.</h4>
+                <p>
+                    M-Bus (Meter-Bus) is a European standard (EN 13757-2 physical and link layer,
+                    EN 13757-3 application layer) for the remote reading of water meter, gas or electricity meters.
+                    M-Bus is also usable for other types of consumption meters. The M-Bus interface is made for
+                    communication on two wires, making it cost-effective. Click <a href="https://m-bus.com/" class="text-danger">here</a> to get more information.
+                    <br />
+                    Just paste your <strong>bytes as hex</strong> in the input area, click the '<strong>Parse</strong>' button and you will get parsed
+                    meter data.
+                </p>
+                <form asp-action="Parse">
+                    <div class="form-group">
+                        <span asp-validation-for="InputText" class="text-danger"></span>
+                        <textarea asp-for="InputText" class="form-control text-uppercase" rows="5"></textarea>
+                        <button type="submit" class="btn btn-primary m-1">Parse</button>
+                        <input asp-for="IsExpert" /> Expert
+                        <p>
+                            @if (!string.IsNullOrEmpty(Model.Error))
+                            {
+                                <strong class="text-danger">@Model.Error</strong>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.OutputText))
+                            {
+                                <textarea asp-for="OutputText" class="form-control" rows="@(Model.OutputText.Split('\n').Length)"></textarea>
+                            }
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </article>
 </div>
+
