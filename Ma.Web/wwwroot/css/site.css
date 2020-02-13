@@ -25,7 +25,7 @@ body {
     top: -18px;
     bottom: 0;
     font-family: Lato, Helvetica;
-    font-style:italic;
+    font-style: italic;
     font-size: 20px;
     color: #152f4f;
     text-decoration: none !important;
@@ -56,16 +56,43 @@ img.logo {
     font-weight: bold;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.carousel-caption {
+    top: 3%;
+    left: 3%;
+    text-align: left;
+    max-width: 440px;
+    right: auto;
+    vertical-align: top !important;
 }
+
+    .carousel-caption button {
+        text-align: center;
+        background: linear-gradient(to right, #C0B283 50%,#DCD0C0 50%);
+        background-size: 200% 100%;
+        transition: all 1s ease;
+    }
+
+        .carousel-caption button:hover {
+            background-position: right bottom;
+        }
+
+    /* Carousel */
+    .carousel-caption p {
+        font-size: 20px;
+        line-height: 1.4;
+    }
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
+
+.carousel-control-prev,
+.carousel-control-next {
+    top: 70%;
+    width: 3%
+}
+
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
@@ -82,7 +109,7 @@ img.logo {
 
 .footer {
     background: #152f4f;
-    color: white;    
+    color: white;
 }
 
     .footer .links ul {
@@ -131,7 +158,14 @@ img.logo {
     box-sizing: border-box;
     width: 100%;
     z-index: 9999;
-    box-shadow: rgba(0,0,0,.5) 0px 5px 50px;    
+    box-shadow: rgba(0,0,0,.5) 0px 5px 50px;
     left: 0px;
     font-weight: 300;
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover;
+    background-image: url('../images/banner_bg.png');
+    background-size: 100%;
 }
