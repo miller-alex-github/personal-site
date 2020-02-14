@@ -27,7 +27,7 @@ body {
     font-family: Lato, Helvetica;
     font-style: italic;
     font-size: 20px;
-    color: #152f4f;
+    color: #A6A7A9;
     text-decoration: none !important;
     cursor: default;
 }
@@ -127,9 +127,9 @@ img.logo {
         display: none;
     }
 
-    .banner-small
-    {
-        display: block;
+    .banner-small {
+        display: block;        
+        width: 100%;      
     }
 
     .carousel-caption {
