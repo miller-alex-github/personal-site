@@ -4,6 +4,15 @@ body {
     color: #393939;
 }
 
+h3 {
+    font-size: 28px;
+}
+
+h2, h3 {
+    font-weight: 400;
+    color: #0c3c76;
+}
+
 @font-face {
     font-family: 'Romantically';
     src: url('../fonts/Romantically.otf');
@@ -128,8 +137,8 @@ img.logo {
     }
 
     .banner-small {
-        display: block;        
-        width: 100%;      
+        display: block;
+        width: 100%;
     }
 
     .carousel-caption {
@@ -208,4 +217,60 @@ img.logo {
     object-fit: cover;
     background-image: url('../images/banner_bg.png');
     background-size: 100%;
+}
+
+#abilities ul > li {
+    min-height: 30px;
+    padding: 2px 0px;
+}
+
+    #abilities ul > li .ability-title {
+        display: inline-block;
+        width: 60%;
+    }
+
+    #abilities ul > li .ability-score {
+        float: right;
+    }
+
+        #abilities ul > li .ability-score .glyphicon.filled {
+            color: rgba(12, 60, 118, 0.85);
+        }
+
+        #abilities ul > li .ability-score .glyphicon {
+            color: #DFE0E0;
+            font-size: 14px;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+ul.no-bullets {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul li:hover {
+    background: rgba(12, 60, 118, 0.10);
+}
+
+    ul li:hover ul {
+        display: block;
+    }
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-star:before {
+    content: "\e113"; /*  130, 115, 144, 141 */
 }
