@@ -56,6 +56,10 @@ img.logo {
     font-weight: bold;
 }
 
+.banner-small {
+    display: none;
+}
+
 .carousel-caption {
     top: 3%;
     left: 3%;
@@ -82,22 +86,58 @@ img.logo {
         line-height: 1.4;
     }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
 .carousel-control-prev,
 .carousel-control-next {
     top: 70%;
     width: 3%
 }
 
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
+@media screen and (max-width: 1200px) {
     .carousel-caption {
+        top: 3%;
+        left: 3%;
+        text-align: left;
+        max-width: 360px;
+        right: auto;
+        vertical-align: top !important;
+    }
+
+        .carousel-caption p {
+            font-size: 16px;
+        }
+}
+
+@media screen and (max-width: 1000px) {
+    .carousel-caption {
+        top: 3%;
+        left: 3%;
+        text-align: left;
+        max-width: 270px;
+        right: auto;
+        vertical-align: top !important;
+    }
+
+        .carousel-caption p {
+            font-size: 12px;
+        }
+}
+
+@media screen and (max-width: 800px) {
+    .carousel {
+        display: none;
+    }
+
+    .banner-small
+    {
+        display: block;
+    }
+
+    .carousel-caption {
+        display: none;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
         display: none;
     }
 }
