@@ -35,7 +35,7 @@ The following technology is used to develop this website:
 * Polly www.github.com/App-vNext/Polly (allows to express resilience and transient fault handling policies)
 * Dependency Injection
 * SMTP
-* Swagger (wagger.io) allows to describe the structure of the RESTfull API.
+* Swagger (swagger.io) allows to describe the structure of the RESTfull API.
 * Autommaper (automapper.org) to map models to DTO (Data Transfer Object)
 * Ocelot (github.com/ThreeMammals/Ocelot) is a .NET API Gateway used for microservices.
 * Refit (github.com/reactiveui/refit) The automatic type-safe REST library for .NET Core, Xamarin and .NET
