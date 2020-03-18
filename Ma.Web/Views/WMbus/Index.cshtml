@@ -27,10 +27,11 @@
                                 <span class="input-group-text" id="inputGroup-sizing-default">Secret key</span>
                             </div>
                             <input asp-for="SecretKey" type="text" class="form-control text-uppercase" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                        </div>                        
+                        </div>
                         <span asp-validation-for="InputText" class="text-danger"></span>
                         <textarea asp-for="InputText" class="form-control text-uppercase" rows="5"></textarea>
-                        <button type="submit" class="btn btn-primary m-1">Parse</button>
+                        <button type="submit" name="command" value="parse" class="btn btn-primary m-1">Parse</button>  
+                        <button type="submit" name="command" value="pdf" class="btn btn-primary m-1">Create expert report</button>                        
                         <p>
                             @if (!string.IsNullOrEmpty(Model.Error))
                             {

@@ -37,8 +37,14 @@
     <Reference Include="Common">
       <HintPath>..\lib\Common.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Report">
+      <HintPath>..\lib\Common.Report.dll</HintPath>
+    </Reference>
     <Reference Include="MBusLib">
       <HintPath>..\lib\MBusLib.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\lib\PdfSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 
