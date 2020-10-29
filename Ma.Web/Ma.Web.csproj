@@ -34,17 +34,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Common">
-      <HintPath>..\lib\Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Report">
-      <HintPath>..\lib\Common.Report.dll</HintPath>
-    </Reference>
-    <Reference Include="MBusLib">
-      <HintPath>..\lib\MBusLib.dll</HintPath>
-    </Reference>
     <Reference Include="PdfSharp">
       <HintPath>..\lib\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ZENNER.Handler">
+      <HintPath>..\lib\ZENNER.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="ZENNER.MBusLib">
+      <HintPath>..\lib\ZENNER.MBusLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ZENNER.Report">
+      <HintPath>..\lib\ZENNER.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="ZENNER.Report.Handler">
+      <HintPath>..\lib\ZENNER.Report.Handler.dll</HintPath>
+    </Reference>
+    <Reference Include="ZENNER.Shared">
+      <HintPath>..\lib\ZENNER.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 
