@@ -5,7 +5,8 @@
     <Version>1.2</Version> 
     <Authors>Alexander Miller</Authors> 
     <Product>Personal Website</Product> 
-    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>  
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis> 
+    <UserSecretsId>9f4b66d0-c89b-4454-acb9-dbf643e145e0</UserSecretsId>  
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -35,22 +36,19 @@
 
   <ItemGroup>
     <Reference Include="PdfSharp">
-      <HintPath>..\lib\PdfSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="ZENNER.Handler">
-      <HintPath>..\lib\ZENNER.Handler.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.MBusLib">
-      <HintPath>..\lib\ZENNER.MBusLib.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.MBusLib.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report">
-      <HintPath>..\lib\ZENNER.Report.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.Report.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report.Handler">
-      <HintPath>..\lib\ZENNER.Report.Handler.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.Report.Handler.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Shared">
-      <HintPath>..\lib\ZENNER.Shared.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 
