@@ -43,7 +43,7 @@ namespace Ma.Web.Controllers
 
                         var productName = string.IsNullOrEmpty(frame.ProductName) ? string.Empty : "_" + MakeValidFileName(frame.ProductName);
                         productName = productName.Replace(" ", "_");
-                        var fileName = $"WMBUS_{frame.Header.ID_BCD.ToString("X8")}{productName}.pdf";
+                        var fileName = $"WMBUS_{frame.Header.ID_BCD.Value.ToString("X8")}{productName}.pdf";
 
                         HttpContext.Response.Headers.Add("Content-Disposition", $"attachment;filename={fileName}");
                         return new FileStreamResult(stream, "application/pdf"); 
