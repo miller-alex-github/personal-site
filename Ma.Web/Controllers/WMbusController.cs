@@ -31,7 +31,7 @@ namespace Ma.Web.Controllers
             {
                 try
                 {
-                    var buffer = Util.HexStringToByteArray(data.InputText);
+                    var buffer = Util.HexStringToByteArray(data.InputText.Trim());
                     var frame = WMBusFrame.Parse(buffer, new Keys(data.SecretKey));                                                                            
                     data.OutputText = frame.Print(data.IsExpert);
 

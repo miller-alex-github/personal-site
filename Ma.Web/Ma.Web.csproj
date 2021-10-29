@@ -36,19 +36,19 @@
 
   <ItemGroup>
     <Reference Include="PdfSharp">
-      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\PdfSharp.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netstandard2.0\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.MBusLib">
-      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.MBusLib.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netstandard2.0\ZENNER.MBusLib.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report">
-      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.Report.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netstandard2.0\ZENNER.Report.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report.Handler">
-      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.Report.Handler.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netstandard2.0\ZENNER.Report.Handler.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Shared">
-      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netcoreapp3.1\ZENNER.Shared.dll</HintPath>
+      <HintPath>..\..\..\SVN\SW-projects\framework\Output\netstandard2.0\ZENNER.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 
