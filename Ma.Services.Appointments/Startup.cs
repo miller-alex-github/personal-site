@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.IO;
@@ -54,19 +53,19 @@ namespace Ma.Services.Appointments
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new Info
+                c.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Appointment Management API",
                     Version = "v1.0",
                     Description = "The goal of the appointment service is to provide a cloud-based functionality to help you to organize you time effective.",
-                    Contact = new Contact
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
                     {
                         Name = "Alexandr Miller",
                         Email = "info@miller-alex.de"
                     },
-                    License = new License
+                    License = new Microsoft.OpenApi.Models.OpenApiLicense
                     {
-                        Url = "https://raw.githubusercontent.com/miller-alex-github/personal-site/master/LICENSE"
+                        Url = new Uri("https://raw.githubusercontent.com/miller-alex-github/personal-site/master/LICENSE")
                     }
                 });
 
@@ -88,13 +87,14 @@ namespace Ma.Services.Appointments
                 xmlFiles.ForEach(xml => c.IncludeXmlComments(xml));
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddRouting();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -104,8 +104,8 @@ namespace Ma.Services.Appointments
             }
             
             app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseAuthentication();
-            app.UseMvc();
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "docs/{documentName}/docs.json";

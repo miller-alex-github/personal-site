@@ -9,26 +9,26 @@ namespace Ma.ApiGateway
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
-            Environment = environment;
+            Env = env;
         }
 
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment Environment { get; }
+        public IWebHostEnvironment Env { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            if (Environment.IsDevelopment())
+            if (Env.EnvironmentName == "Development")
                 services.AddOcelot(Configuration);
             else
                 services.AddOcelot(Configuration).AddDelegatingHandler<ProxyHandler>(true); // Use proxy in production
         }
                 
-        public async void Configure(IApplicationBuilder app)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (Environment.IsDevelopment())
+            if (env.EnvironmentName == "Development")
                 app.UseDeveloperExceptionPage();
             
             await app.UseOcelot();

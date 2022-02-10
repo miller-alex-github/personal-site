@@ -29,8 +29,12 @@ namespace Ma.Web.Controllers
                 try
                 {
                     var buffer = Util.HexStringToByteArray(data.InputText);
-                    var frame = RSP_UD.Parse(buffer);
-                    data.OutputText = frame.Print(data.IsExpert);                    
+                    var frames = RSP_UD.Parse(DateTime.UtcNow, buffer);
+                    if (frames != null)
+                    {
+                        foreach (var frame in frames)                        
+                            data.OutputText = frame.Print(data.IsExpert);
+                    }
                 }
                 catch (Exception exc)
                 {

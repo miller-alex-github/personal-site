@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,14 +20,14 @@ namespace Ma.Web
 {
     public class Startup
     {   
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
-            Environment = environment;
+            Env = env;
         }
 
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment Environment { get; }        
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -69,19 +68,21 @@ namespace Ma.Web
             })
             .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler()
             {
-                Proxy = Environment.IsDevelopment() ? null : new WebProxy("http://winproxy.server.lan:3128")   
+                Proxy = Env.EnvironmentName == "Development" ? null : new WebProxy("http://winproxy.server.lan:3128")   
             });
-                        
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddRouting();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddHangfireServer(); // Enabled Hangfire server with dashboard and start a daily job to check the appointments.
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (Environment.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseDeveloperExceptionPage();                
             }
             else
             {
@@ -97,10 +98,6 @@ namespace Ma.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseAuthentication();
-
-            // Enabled Hangfire server with dashboard and start a daily job to check the appointments.            
-            app.UseHangfireServer();
             app.UseHangfireDashboard(options: new DashboardOptions
             {
                 Authorization = new[] { new HangfireDashboardAuthorizationFilter() }, 
@@ -120,11 +117,12 @@ namespace Ma.Web
                 await next();                
             });
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
 

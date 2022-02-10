@@ -32,7 +32,7 @@ namespace Ma.Web.Controllers
                 try
                 {
                     var buffer = Util.HexStringToByteArray(data.InputText.Trim());
-                    var frame = WMBusFrame.Parse(buffer, new Keys(data.SecretKey));                                                                            
+                    var frame = WMBusFrame.Parse(DateTime.UtcNow, buffer, new Keys(data.SecretKey));                                                                            
                     data.OutputText = frame.Print(data.IsExpert);
 
                     if (command.Equals("pdf"))

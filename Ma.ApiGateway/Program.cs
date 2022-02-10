@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace Ma.ApiGateway
 {
@@ -8,13 +9,20 @@ namespace Ma.ApiGateway
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
-        }
+            var host = Host.CreateDefaultBuilder(args)
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder
+                        .UseKestrel()
+                        .UseIIS()
+                        .ConfigureAppConfiguration((host, config) => config
+                        .AddJsonFile($"ocelot.{host.HostingEnvironment.EnvironmentName}.json"))
+                        .UseStartup<Startup>();
+                })
+            .Build();
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((host, config) => config
-            .AddJsonFile($"ocelot.{host.HostingEnvironment.EnvironmentName}.json"))
-            .UseStartup<Startup>();
+            host.Run();
+        }
     }
 }
