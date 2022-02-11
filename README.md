@@ -22,12 +22,12 @@ The application is build based on the microservices architecture. The below figu
 The following technology is used to develop this website:
 
 * Language: C#
-* IDE: Visual Studio 2019
-* Platform: .NET Core 2.1 / ASP.NET Core
+* IDE: Visual Studio 2022
+* Platform: .NET6 / ASP.NET Core
 * Postman (www.getpostman.com) is used to test micro services API
 * SQL Server as RDBMS
 * LINQ
-* Entity Framework Core 3.0
+* Entity Framework Core 6
 	* Migrations
 * HTML5 / CSS3
 * Hangfire www.hangfire.io (perform background processing)

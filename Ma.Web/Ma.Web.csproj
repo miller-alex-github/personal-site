@@ -6,7 +6,8 @@
     <Authors>Alexander Miller</Authors> 
     <Product>Personal Website</Product> 
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis> 
-    <UserSecretsId>9f4b66d0-c89b-4454-acb9-dbf643e145e0</UserSecretsId>  
+    <UserSecretsId>9f4b66d0-c89b-4454-acb9-dbf643e145e0</UserSecretsId>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

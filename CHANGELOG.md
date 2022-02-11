@@ -1,6 +1,9 @@
 # Change Log
 
-## [1.2] In process
+## [1.3] 2022-02-11
+- Migrate to NET6
+
+## [1.2] 2019-12-01
 - Redesign main layout of footer.
 - Add micro service for appointments (https://appointments.miller-alex.de/docs/index.html).
 - Added unit test scaffold
