@@ -33,11 +33,11 @@ namespace Ma.Web.Controllers
                 {
                     var buffer = Util.HexStringToByteArray(data.InputText.Trim());
                     var frame = WMBusFrame.Parse(DateTime.UtcNow, buffer, new Keys(data.SecretKey));                                                                            
-                    data.OutputText = frame.Print(data.IsExpert);
+                    data.OutputText = frame.ToString();
 
                     if (command.Equals("pdf"))
                     {
-                        var stream = new MemoryStream();                        
+                        var stream = new MemoryStream();
                         ReportMeterExpert.Create(frame, stream, false);
                         stream.Position = 0;
 
@@ -46,7 +46,7 @@ namespace Ma.Web.Controllers
                         var fileName = $"WMBUS_{frame.Header.ID_BCD.Value.ToString("X8")}{productName}.pdf";
 
                         HttpContext.Response.Headers.Add("Content-Disposition", $"attachment;filename={fileName}");
-                        return new FileStreamResult(stream, "application/pdf"); 
+                        return new FileStreamResult(stream, "application/pdf");
                     }
                 }
                 catch (Exception exc)
