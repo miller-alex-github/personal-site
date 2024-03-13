@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29411.108
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.Web", "Ma.Web\Ma.Web.csproj", "{35DB62F0-74BF-4E95-8291-9D210CF6AC95}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.Services.Appointments.Un
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.ApiGateway", "Ma.ApiGateway\Ma.ApiGateway.csproj", "{F20FE177-8C18-4ACE-AF15-FC4B5BC42D6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.Shared", "Ma.Shared\Ma.Shared.csproj", "{2822C37F-C451-408A-832D-AE637F884D56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ma.Shared", "Ma.Shared\Ma.Shared.csproj", "{2822C37F-C451-408A-832D-AE637F884D56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

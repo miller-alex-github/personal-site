@@ -1,4 +1,5 @@
-﻿using Ma.Shared;
+﻿using Asp.Versioning;
+using Ma.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -29,7 +29,7 @@ namespace Ma.Web.Controllers
                 try
                 {
                     var buffer = Util.HexStringToByteArray(data.InputText);
-                    var frames = RSP_UD.Parse(DateTime.UtcNow, buffer);
+                    var frames = RSP_UD.Parse(Direction.DeviceToGateway, DateTime.UtcNow, buffer);
                     if (frames != null)
                     {
                         foreach (var frame in frames)                        

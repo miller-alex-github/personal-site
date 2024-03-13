@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework> 
-    <Version>1.4</Version> 
+    <TargetFramework>net8.0</TargetFramework> 
+    <Version>1.5</Version> 
     <Authors>Alexander Miller</Authors> 
     <Product>Personal Website</Product> 
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis> 
@@ -20,20 +20,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
-    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.28" />
-    <PackageReference Include="Hangfire.Core" Version="1.7.28" />
-    <PackageReference Include="Hangfire.SqlServer" Version="1.7.28" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.1" />
+    <PackageReference Include="Hangfire" Version="1.8.11" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.11" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.11" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
-    <PackageReference Include="Polly" Version="7.2.3" />
-    <PackageReference Include="Refit" Version="6.3.2" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.1" />
+    <PackageReference Include="Polly" Version="8.3.1" />
+    <PackageReference Include="Refit" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,19 +42,19 @@
 
   <ItemGroup>
     <Reference Include="PdfSharp">
-      <HintPath>..\..\..\..\SVN\SW-projects\framework\ZENNER.Framework.Publish\bin\Release\netstandard2.0\PdfSharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.MBusLib">
-      <HintPath>..\..\..\..\SVN\SW-projects\framework\ZENNER.Framework.Publish\bin\Release\netstandard2.0\ZENNER.MBusLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.MBusLib.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report">
-      <HintPath>..\..\..\..\SVN\SW-projects\framework\ZENNER.Framework.Publish\bin\Release\netstandard2.0\ZENNER.Report.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.Report.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report.Handler">
-      <HintPath>..\..\..\..\SVN\SW-projects\framework\ZENNER.Framework.Publish\bin\Release\netstandard2.0\ZENNER.Report.Handler.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.Report.Handler.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Shared">
-      <HintPath>..\..\..\..\SVN\SW-projects\framework\ZENNER.Framework.Publish\bin\Release\netstandard2.0\ZENNER.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 
