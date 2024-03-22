@@ -1,5 +1,8 @@
 # Change Log
 
+## [1.6] 2024-03-22
+ - Update ZF to v1.2.23
+
 ## [1.5] 2024-03-13
  - Update ZF to v1.2.20
 	
