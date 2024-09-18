@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.7] 2024-09-18
+ - Update ZF to v1.2.56
+	- Fix: [ZENAPP-209] M-Bus parser, The management of orthogonal byte in special cases FBh FDh and FDhFDh is implemented incorrectly. 
+	
 ## [1.6] 2024-03-22
  - Update ZF to v1.2.23
 
