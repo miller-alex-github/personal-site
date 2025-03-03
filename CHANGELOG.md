@@ -1,5 +1,9 @@
-# Change Log
+﻿# Change Log
 
+## [1.8] 2025-03-03
+ - Update ZF to v1.2.66
+	- Added: [PAR-101] wM-Bus parser, Parser now supports Kamstrup Multical/QFlow.
+	
 ## [1.7] 2024-09-18
  - Update ZF to v1.2.56
 	- Fix: [ZENAPP-209] M-Bus parser, The management of orthogonal byte in special cases FBh FDh and FDhFDh is implemented incorrectly. 
