@@ -1,5 +1,10 @@
 ﻿# Change Log
 
+## [1.9] 2025-03-03
+ - Update ZF to v1.2.66
+	- Migrate to NET9
+	- Added: wM-Bus, CompactProfile->IncrementMode->Increments are now supported
+	
 ## [1.8] 2025-03-03
  - Update ZF to v1.2.66
 	- Added: [PAR-101] wM-Bus parser, Parser now supports Kamstrup Multical/QFlow.

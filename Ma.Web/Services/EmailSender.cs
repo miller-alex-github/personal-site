@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -11,53 +10,44 @@ using System.Threading.Tasks;
 namespace Ma.Web.Services
 {
     public class EmailSender : IEmailSender
-    {
-        private readonly IHostingEnvironment environment;
+    {        
         private readonly ILogger<EmailSender> logger;
         private readonly IConfiguration configuration;
 
-        public EmailSender(IHostingEnvironment environment, ILogger<EmailSender> logger, IConfiguration configuration)
-        {
-            this.environment = environment;
+        public EmailSender(ILogger<EmailSender> logger, IConfiguration configuration)
+        {           
             this.logger = logger;
             this.configuration = configuration;
         }
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            if (environment.IsDevelopment())
+            using (var smtp = new SmtpClient())
             {
-                logger.LogInformation($"Send email to: {email}, subject: {subject}, message: {htmlMessage}");                
-            }
-            else
-            {
-                using (var smtp = new SmtpClient())
+                var credential = new NetworkCredential
                 {
-                    var credential = new NetworkCredential
-                    {
-                        UserName = configuration["Email:Email"],
-                        Password = configuration["Email:Password"]
-                    };
+                    UserName = configuration["Email:Email"],
+                    Password = configuration["Email:Password"]
+                };
 
-                    smtp.Credentials = credential;
-                    smtp.Host      = configuration["Email:Host"];
-                    smtp.Port      = int.Parse(configuration["Email:Port"]);
-                    smtp.EnableSsl = true;
+                smtp.Credentials = credential;
+                smtp.Host = configuration["Email:Host"];
+                smtp.Port = int.Parse(configuration["Email:Port"]);
+                smtp.EnableSsl = true;
 
-                    using (var mail = new MailMessage())
-                    {
-                        mail.To.Add(new MailAddress(email));
-                        mail.From       = new MailAddress(configuration["Email:Email"], configuration["Email:DisplayName"]);
-                        mail.Subject    = subject;
-                        mail.Body       = htmlMessage;
-                        mail.IsBodyHtml = true;
+                using (var mail = new MailMessage())
+                {
+                    mail.To.Add(new MailAddress(email));
+                    mail.From = new MailAddress(configuration["Email:Email"], configuration["Email:DisplayName"]);
+                    mail.Subject = subject;
+                    mail.Body = htmlMessage;
+                    mail.IsBodyHtml = true;
 
-                        await Policy
-                            .Handle<Exception>()
-                            .WaitAndRetry(3, r => TimeSpan.FromSeconds(2), (ex, ts) => { logger.LogError("Error sending mail. Retrying in 2 sec."); })
-                            .Execute(() => smtp.SendMailAsync(mail))
-                            .ContinueWith(_ => logger.LogInformation($"Notification mail sent to: {email}, subject: {subject}, message: {htmlMessage}"));
-                    }
+                    await Policy
+                        .Handle<Exception>()
+                        .WaitAndRetry(3, r => TimeSpan.FromSeconds(2), (ex, ts) => { logger.LogError("Error sending mail. Retrying in 2 sec."); })
+                        .Execute(() => smtp.SendMailAsync(mail))
+                        .ContinueWith(_ => logger.LogInformation($"Notification mail sent to: {email}, subject: {subject}, message: {htmlMessage}"));
                 }
             }
         }
