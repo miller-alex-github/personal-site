@@ -1,5 +1,9 @@
 ﻿# Change Log
 
+## [1.10] 2025-04-11
+ - Update ZF to v1.2.68	
+	- Added: wM-Bus, Parser now supports Kamstrup Multical/QFlow 79h CI-field, RSP from device, compact frame, no data header.
+
 ## [1.9] 2025-03-03
  - Update ZF to v1.2.66
 	- Migrate to NET9
@@ -7,7 +11,7 @@
 	
 ## [1.8] 2025-03-03
  - Update ZF to v1.2.66
-	- Added: [PAR-101] wM-Bus parser, Parser now supports Kamstrup Multical/QFlow.
+	- Added: [PAR-101] wM-Bus parser, Parser now supports Kamstrup Multical/QFlow (78h CI-field, without header, start immediately with VIF/DIF).
 	
 ## [1.7] 2024-09-18
  - Update ZF to v1.2.56
