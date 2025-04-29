@@ -1,8 +1,13 @@
 ﻿# Change Log
 
+## [1.11] 2025-04-29
+ - Update ZF to v1.2.69	
+	- Added: wM-Bus parser, Parser now supports Kamstrup KAM_27 (CI-field 79h) RSP from device, compact frame, no data header.
+	
 ## [1.10] 2025-04-11
  - Update ZF to v1.2.68	
-	- Added: wM-Bus, Parser now supports Kamstrup Multical/QFlow 79h CI-field, RSP from device, compact frame, no data header.
+	- Added: wM-Bus, [PAR-101] Parser now supports Kamstrup KAM_29 (CI-field 79h and 78h) with original header and decoded data part.
+    - Added: wM-Bus, [PAR-101] Parser now supports Kamstrup KAM_29 (CI-field 79h) RSP from device, compact frame, no data header.
 
 ## [1.9] 2025-03-03
  - Update ZF to v1.2.66
