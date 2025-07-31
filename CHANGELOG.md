@@ -1,5 +1,9 @@
 ﻿# Change Log
 
+## [1.12] 2025-07-31
+ - Update ZF to v1.3.4	
+    - Added: [Wireless M-Bus, OMS-Over-LoRa] DIN EN 13757-7 Security Mode 10 (AES-CCM-128, KDF_A)
+	
 ## [1.11] 2025-04-29
  - Update ZF to v1.2.69	
 	- Added: wM-Bus parser, Parser now supports Kamstrup KAM_27 (CI-field 79h) RSP from device, compact frame, no data header.
