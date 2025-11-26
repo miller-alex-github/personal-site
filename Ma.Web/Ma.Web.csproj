@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework> 
-    <Version>1.12</Version> 
+    <Version>1.13</Version> 
     <Authors>Alexander Miller</Authors> 
     <Product>Personal Website</Product> 
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis> 
@@ -44,19 +44,19 @@
 
   <ItemGroup>
     <Reference Include="PdfSharp">
-      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\PdfSharp.dll</HintPath>
+      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.Report.Handler\bin\Debug\netstandard2.0\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.MBusLib">
-      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.MBusLib.dll</HintPath>
+      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.MBusLib\bin\Debug\netstandard2.0\ZENNER.MBusLib.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report">
-      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.Report.dll</HintPath>
+      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.Report.Handler\bin\Debug\netstandard2.0\ZENNER.Report.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Report.Handler">
-      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.Report.Handler.dll</HintPath>
+      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.Report.Handler\bin\Debug\netstandard2.0\ZENNER.Report.Handler.dll</HintPath>
     </Reference>
     <Reference Include="ZENNER.Shared">
-      <HintPath>..\..\..\..\..\Documents\SVN\SW-projects\framework\ZENNER.Framework.Publish.Android\bin\Debug\netstandard2.0\ZENNER.Shared.dll</HintPath>
+      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.MBusLib\bin\Debug\netstandard2.0\ZENNER.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 

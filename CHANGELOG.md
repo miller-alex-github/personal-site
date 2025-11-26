@@ -1,5 +1,9 @@
 ﻿# Change Log
 
+## [1.13] 2025-11-26
+ - Update ZF to v1.5.2	
+    - Fix: [M-Bus] VIF 0x23 operating time, The following units of time are 10 times too large: seconds, minutes, hours, days.
+ 
 ## [1.12] 2025-07-31
  - Update ZF to v1.3.4	
     - Added: [Wireless M-Bus, OMS-Over-LoRa] DIN EN 13757-7 Security Mode 10 (AES-CCM-128, KDF_A)
