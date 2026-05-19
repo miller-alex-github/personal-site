@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using ZENNER.MBusLib;
-using ZENNER.Report.Handler;
+using ZENNER.Report;
 using ZENNER.Shared;
 
 namespace Ma.Web.Controllers
@@ -22,7 +23,7 @@ namespace Ma.Web.Controllers
 
         [HttpPost]
         [Route("[controller]")]
-        public IActionResult Parse([FromForm]MBusData data, string command)
+        public async Task<IActionResult> Parse([FromForm]MBusData data, string command)
         {
             data.OutputText = string.Empty;
             data.Error = string.Empty;
@@ -38,7 +39,8 @@ namespace Ma.Web.Controllers
                     if (command.Equals("pdf"))
                     {
                         var stream = new MemoryStream();
-                        ReportMeterExpert.Create(frame, stream, false);
+                        
+                        await ReportMeterExpert.CreateAsync(frame, stream);
                         stream.Position = 0;
 
                         var productName = string.IsNullOrEmpty(frame.ProductName) ? string.Empty : "_" + MakeValidFileName(frame.ProductName);
@@ -46,7 +48,7 @@ namespace Ma.Web.Controllers
                         var fileName = $"WMBUS_{frame.Header.ID_BCD.Value.ToString("X8")}{productName}.pdf";
 
                         HttpContext.Response.Headers.Add("Content-Disposition", $"attachment;filename={fileName}");
-                        return new FileStreamResult(stream, "application/pdf");
+                        return new FileStreamResult(stream, "application/pdf");                        
                     }
                 }
                 catch (Exception exc)

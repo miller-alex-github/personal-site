@@ -36,28 +36,11 @@
     <PackageReference Include="Polly" Version="8.5.2" />
     <PackageReference Include="Refit" Version="8.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.0" />
+    <PackageReference Include="ZENNER.MBus" Version="1.7.12.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Ma.Shared\Ma.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="PdfSharp">
-      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.Report.Handler\bin\Debug\netstandard2.0\PdfSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="ZENNER.MBusLib">
-      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.MBusLib\bin\Debug\netstandard2.0\ZENNER.MBusLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ZENNER.Report">
-      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.Report.Handler\bin\Debug\netstandard2.0\ZENNER.Report.dll</HintPath>
-    </Reference>
-    <Reference Include="ZENNER.Report.Handler">
-      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.Report.Handler\bin\Debug\netstandard2.0\ZENNER.Report.Handler.dll</HintPath>
-    </Reference>
-    <Reference Include="ZENNER.Shared">
-      <HintPath>..\..\SW-projects\framework\ZENNER.Framework\ZENNER.MBusLib\bin\Debug\netstandard2.0\ZENNER.Shared.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

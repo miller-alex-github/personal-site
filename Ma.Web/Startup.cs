@@ -56,25 +56,25 @@ namespace Ma.Web
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IJsonWebTokenService, JsonWebTokenService>(); // JSON Web Token service           
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IAppointmentEmailNotification, AppointmentEmailNotification>();
-            services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
+            //services.AddTransient<IEmailSender, EmailSender>();
+            //services.AddTransient<IAppointmentEmailNotification, AppointmentEmailNotification>();
+            //services.AddHangfire(configuration => configuration.UseSqlServerStorage(connectionString));
 
             // REST service 'Appointments'
-            services.AddHttpClient<IAppointmentsAPI, AppointmentsAPI>("ApiGateway", c =>
-            {
-                c.BaseAddress = new Uri(Configuration["ApiGateway"]);
-                c.DefaultRequestHeaders.Add("Accept", "application/json");
-            })
-            .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler()
-            {
-                Proxy = Env.EnvironmentName == "Development" ? null : new WebProxy("http://winproxy.server.lan:3128")   
-            });
+            //services.AddHttpClient<IAppointmentsAPI, AppointmentsAPI>("ApiGateway", c =>
+            //{
+            //    c.BaseAddress = new Uri(Configuration["ApiGateway"]);
+            //    c.DefaultRequestHeaders.Add("Accept", "application/json");
+            //})
+            //.ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler()
+            //{
+            //    Proxy = Env.EnvironmentName == "Development" ? null : new WebProxy("http://winproxy.server.lan:3128")   
+            //});
 
             services.AddRouting();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddHangfireServer(); // Enabled Hangfire server with dashboard and start a daily job to check the appointments.
+            //services.AddHangfireServer(); // Enabled Hangfire server with dashboard and start a daily job to check the appointments.
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,19 +93,19 @@ namespace Ma.Web
                     .Preload());
             }
 
-            app.AutoMigrateDatabase();         
+            //app.AutoMigrateDatabase();         
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseHangfireDashboard(options: new DashboardOptions
-            {
-                Authorization = new[] { new HangfireDashboardAuthorizationFilter() }, 
-                AppPath = "/Admin" // go back to admin site                
-            });
-            RecurringJob.AddOrUpdate<IAppointmentEmailNotification>(appointment => appointment.CheckAppointment(), Cron.Daily(9)); // 9 o'clock AM
+            //app.UseHangfireDashboard(options: new DashboardOptions
+            //{
+            //    Authorization = new[] { new HangfireDashboardAuthorizationFilter() }, 
+            //    AppPath = "/Admin" // go back to admin site                
+            //});
+            //RecurringJob.AddOrUpdate<IAppointmentEmailNotification>(appointment => appointment.CheckAppointment(), Cron.Daily(9)); // 9 o'clock AM
 
-            app.Map("/ping", Ping);
+            //app.Map("/ping", Ping);
 
             // Make life a little harder for the hacker.
             app.Use(async (context, next) =>
